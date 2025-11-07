@@ -35,7 +35,7 @@ def create_mock_preprocessors(models_dir='models'):
     joblib.dump(scaler, os.path.join(models_dir, 'scaler.pkl'))
     joblib.dump(pca, os.path.join(models_dir, 'pca.pkl'))
     
-    print(f"✓ Mock preprocessors created and saved to {models_dir}/")
+    print(f"[OK] Mock preprocessors created and saved to {models_dir}/")
     return scaler, pca
 
 @st.cache_resource
@@ -50,9 +50,9 @@ def load_preprocessors(models_dir='models'):
     try:
         scaler = joblib.load(scaler_path)
         pca = joblib.load(pca_path)
-        print(f"✓ Preprocessors loaded from {models_dir}/")
+        print(f"[OK] Preprocessors loaded from {models_dir}/")
     except FileNotFoundError:
-        print("⚠ Preprocessors not found. Creating mock preprocessors for demo...")
+        print("[WARNING] Preprocessors not found. Creating mock preprocessors for demo...")
         scaler, pca = create_mock_preprocessors(models_dir)
     
     return scaler, pca

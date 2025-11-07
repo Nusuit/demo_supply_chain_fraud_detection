@@ -29,7 +29,7 @@ def load_models(models_dir='models'):
         y_dummy = np.random.randint(0, 2, 100)
         model.fit(X_dummy, y_dummy)
         models.append(model)
-        print(f"✓ Created mock model with seed {seed}")
+        print(f"[OK] Created mock model with seed {seed}")
     
     return models
 

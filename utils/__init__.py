@@ -4,7 +4,6 @@ Utils package for Fraud Supply Chain Detection Demo
 
 # Import only what's needed, avoid importing TensorFlow-dependent modules by default
 from .constants import *
-from .visualizations import *
 
 # Lazy imports for heavy dependencies
 def get_preprocessing_module():
@@ -34,9 +33,6 @@ __all__ = [
     'TOTAL_FEATURES',
     'get_risk_level',
     'get_fraud_prediction',
-    'get_confusion_matrix_image',
-    'get_roc_curve_image',
-    'check_assets_exist',
     'get_preprocessing_module',
     'get_predictor_module',
 ]
