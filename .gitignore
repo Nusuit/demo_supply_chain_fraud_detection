@@ -23,9 +23,21 @@ wheels/
 .installed.cfg
 *.egg
 
+# Backup files
+*_OLD_BACKUP.py
+*_backup.py
+
+# Debug/analysis files
+DEBUG_*.md
+ANALYSIS_REPORT.md
+FIXES_SUMMARY.md
+IMPLEMENTATION_SUMMARY.md
+IMPROVEMENTS_SUMMARY.md
+
 # Test files
 test_*.py
 *_test.py
+fix_*.py
 
 # Models and data (optional - uncomment if you want to exclude)
 # models/*.keras

@@ -100,9 +100,9 @@ def inject_custom_css():
        BUTTONS
        ============================================ */
 
-    /* Primary Button (Black) */
+    /* Primary Button (Gray instead of Black) */
     .stButton>button {
-        background-color: #0B0B0B;
+        background-color: #5A5A5A;
         color: white;
         border: none;
         border-radius: 8px;
@@ -113,19 +113,19 @@ def inject_custom_css():
     }
 
     .stButton>button:hover {
-        background-color: #2A2A2A;
+        background-color: #404040;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .stButton>button:active {
-        background-color: #0B0B0B;
+        background-color: #5A5A5A;
         transform: scale(0.98);
     }
 
     /* Secondary Button (Outline) */
     .stButton>button[kind="secondary"] {
         background-color: white;
-        color: #0B0B0B;
+        color: #5A5A5A;
         border: 1px solid #EDEDED;
     }
 
@@ -162,7 +162,7 @@ def inject_custom_css():
     }
 
     [data-baseweb="tab"][aria-selected="true"] {
-        background-color: #0B0B0B !important;
+        background-color: #5A5A5A !important;
         color: #FFFFFF !important;
         font-weight: 600;
     }

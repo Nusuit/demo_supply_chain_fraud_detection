@@ -72,11 +72,11 @@ RISK_LEVELS = {
 def get_risk_level(score):
     """Get risk level based on fraud score"""
     if score < 0.3:
-        return "🟢 Rủi ro Thấp", "green"
+        return "⚪ Rủi ro Thấp", "#EDEDED"
     elif score < 0.6:
-        return "🟡 Rủi ro Trung bình", "orange"
+        return "⚫ Rủi ro Trung bình", "#5A5A5A"
     else:
-        return "🔴 Rủi ro Cao", "red"
+        return "⬛ Rủi ro Cao", "#0B0B0B"
 
 def get_fraud_prediction(score, threshold=MODEL_THRESHOLD):
     """Get fraud prediction based on score and threshold"""

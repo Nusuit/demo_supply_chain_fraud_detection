@@ -92,35 +92,32 @@ def transform_data(df, scaler, pca):
     return pca_df
 
 def get_all_feature_names():
-    """Get all 61 feature names used in training"""
+    """Get all 61 feature names used in training (from combined_features.csv)"""
     return [
-        # Transaction features (57)
-        'Days for shipping (real)', 'Days for shipment (scheduled)',
-        'Benefit per order', 'Sales per customer', 'Late_delivery_risk',
-        'Order Item Discount', 'Order Item Discount Rate',
-        'Order Item Product Price', 'Order Item Profit Ratio',
-        'Order Item Quantity', 'Sales', 'Order Item Total',
-        'Order Profit Per Order', 'product_popularity',
-        'product_profit_margin', 'product_avg_discount',
-        'customer_order_count', 'customer_total_spent',
-        'customer_avg_order_value', 'customer_fraud_history',
-        'recency_days', 'order_count_last_30d', 'total_spent_last_30d',
-        'time_since_last_order', 'is_new_customer', 'rush_order',
-        'unusual_quantity', 'high_discount_flag', 'negative_benefit',
-        'international_order', 'high_value_order', 'high_risk_combination',
-        # Additional transaction features (25 more to make 57 total)
-        'order_item_cardprod_id', 'order_item_id', 'product_card_id',
-        'product_category_id', 'days_diff', 'profit_ratio_per_item',
-        'discount_amount', 'item_value', 'shipping_cost_est',
-        'order_complexity', 'customer_lifetime_days', 'avg_days_between_orders',
-        'order_frequency', 'preferred_category', 'preferred_department',
-        'preferred_market', 'preferred_shipping', 'order_size_category',
-        'price_sensitivity', 'discount_hunter', 'bulk_buyer',
-        'weekend_shopper', 'holiday_shopper', 'cross_category_buyer',
-        'return_risk',
-        # Network features (4)
-        'degree_centrality', 'betweenness_centrality',
-        'closeness_centrality', 'pagerank'
+        # Aggregated transaction features (57 total)
+        'Late_delivery_risk_mean', 'Late_delivery_risk_sum', 'Late_delivery_risk_std', 
+        'Late_delivery_risk_min', 'Late_delivery_risk_max',
+        'Benefit per order_mean', 'Benefit per order_sum', 'Benefit per order_std', 
+        'Benefit per order_min', 'Benefit per order_max',
+        'Order Profit Per Order_mean', 'Order Profit Per Order_sum', 'Order Profit Per Order_std', 
+        'Order Profit Per Order_min', 'Order Profit Per Order_max',
+        'Order Item Profit Ratio_mean', 'Order Item Profit Ratio_sum', 'Order Item Profit Ratio_std', 
+        'Order Item Profit Ratio_min', 'Order Item Profit Ratio_max',
+        'Sales_mean', 'Sales_sum', 'Sales_std', 'Sales_min', 'Sales_max',
+        'Order Item Total_mean', 'Order Item Total_sum', 'Order Item Total_std', 
+        'Order Item Total_min', 'Order Item Total_max',
+        'Order Item Quantity_mean', 'Order Item Quantity_sum', 'Order Item Quantity_std', 
+        'Order Item Quantity_min', 'Order Item Quantity_max',
+        'Order Item Discount_mean', 'Order Item Discount_sum', 'Order Item Discount_std', 
+        'Order Item Discount_min', 'Order Item Discount_max',
+        'Order Item Discount Rate_mean', 'Order Item Discount Rate_sum', 'Order Item Discount Rate_std', 
+        'Order Item Discount Rate_min', 'Order Item Discount Rate_max',
+        'Days for shipping (real)_mean', 'Days for shipping (real)_sum', 'Days for shipping (real)_std', 
+        'Days for shipping (real)_min', 'Days for shipping (real)_max',
+        'Type_<lambda>', 'Delivery Status_<lambda>', 'Shipping Mode_<lambda>', 
+        'Customer Segment_<lambda>', 'Market_<lambda>', 'Category Name_<lambda>', 'Department Name_<lambda>',
+        # Network features (4 total)
+        'degree_centrality', 'betweenness_centrality', 'closeness_centrality', 'community_id'
     ]
 
 def prepare_single_transaction(transaction_dict):
