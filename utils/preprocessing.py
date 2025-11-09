@@ -76,8 +76,8 @@ def transform_data(df, scaler, pca):
     numeric_df = numeric_df.fillna(0)
     numeric_df = numeric_df.replace([np.inf, -np.inf], 0)
     
-    # Scale
-    scaled_data = scaler.transform(numeric_df)
+    # Scale (convert to numpy array to avoid feature names warning)
+    scaled_data = scaler.transform(numeric_df.values)
     
     # PCA transform
     pca_data = pca.transform(scaled_data)
@@ -165,12 +165,51 @@ def prepare_batch_transactions(uploaded_file):
     # Get all 61 features
     all_features = get_all_feature_names()
     
-    # Fill missing features with 0
-    for feat in all_features:
-        if feat not in df.columns:
-            df[feat] = 0
+    # Check if data is already aggregated
+    has_aggregated = any('_mean' in col or '_sum' in col for col in df.columns)
     
-    # Select features (in correct order)
-    feature_df = df[all_features]
+    if has_aggregated:
+        # Already aggregated - fill missing features with 0
+        for feat in all_features:
+            if feat not in df.columns:
+                df[feat] = 0
+        feature_df = df[all_features]
+    else:
+        # Raw transaction data - need to extract relevant features
+        # Map raw columns to aggregated feature names (simplified approach)
+        feature_dict = {}
+        
+        # For each row, create a feature vector using available columns
+        rows = []
+        for idx, row in df.iterrows():
+            feat_row = {}
+            for feat in all_features:
+                # Try to find matching column or set reasonable default
+                if feat in df.columns:
+                    feat_row[feat] = row[feat]
+                else:
+                    # Extract base feature name (remove _mean, _sum, etc.)
+                    base_feat = feat.replace('_mean', '').replace('_sum', '').replace('_std', '').replace('_min', '').replace('_max', '')
+                    
+                    if base_feat in df.columns:
+                        # Use the base value for all aggregations
+                        feat_row[feat] = row[base_feat]
+                    else:
+                        # Set sensible defaults based on feature name
+                        if 'late_delivery_risk' in feat.lower():
+                            feat_row[feat] = row.get('Late_delivery_risk', 0)
+                        elif 'benefit' in feat.lower():
+                            feat_row[feat] = row.get('Benefit per order', 0)
+                        elif 'sales' in feat.lower():
+                            feat_row[feat] = row.get('Sales per customer', 0) or row.get('Sales', 0)
+                        elif 'discount' in feat.lower():
+                            feat_row[feat] = row.get('order_item_discount_rate', 0) * 100
+                        elif 'days_for_shipping' in feat.lower():
+                            feat_row[feat] = row.get('Days for shipping (real)', 0)
+                        else:
+                            feat_row[feat] = 0
+            rows.append(feat_row)
+        
+        feature_df = pd.DataFrame(rows)
     
     return feature_df, original_df

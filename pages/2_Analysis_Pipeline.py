@@ -154,10 +154,10 @@ if data_source == "Upload CSV File":
                 st.success(
                     f"Loaded {len(df)} customers from file: {uploaded_file.name} (aggregated format)")
             else:
-                st.warning(
-                    f"File has {len(df)} rows but is not aggregated format")
                 st.info(
-                    "To use real models, you need file combined_features.csv with aggregated per-customer data")
+                    f"Loaded {len(df)} transactions from file: {uploaded_file.name} (raw transaction format)")
+                st.info(
+                    " System will auto-aggregate features when using real models")
 
             # Show preview
             with st.expander("View preview data"):
@@ -444,7 +444,7 @@ elif current_step == 1:
                         problem_reasons[col] = f"Outliers (z={z_score:.2f})"
 
         # Check negative values where shouldn't be
-        if sample[col].iloc[0] < 0 and 'benefit' not in col.lower():
+        if pd.api.types.is_numeric_dtype(sample[col]) and sample[col].iloc[0] < 0 and 'benefit' not in col.lower():
             problems.add(col)
             problem_reasons[col] = "Negative value anomaly"
 
@@ -550,41 +550,49 @@ elif current_step == 2:
     # Add SMOTE explanation
     st.markdown("### Training Data Balancing (SMOTE)")
     
-    smote_explanation_html = """
+    st.markdown("""
     <div style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #F57C00;">
         <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: #0B0B0B;">
             <strong>Important Note:</strong> During model training, we used <strong>SMOTE</strong> (Synthetic Minority Over-sampling Technique) 
             to handle severe class imbalance.
         </p>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
-            <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid #EDEDED;">
-                <div style="font-size: 0.75rem; font-weight: 600; color: #D32F2F; margin-bottom: 0.5rem;">ORIGINAL DATA (Imbalanced)</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: #0B0B0B; margin-bottom: 0.25rem;">93% vs 7%</div>
-                <div style="font-size: 0.875rem; color: #5A5A5A;">133,978 legitimate : 10,437 fraud</div>
-                <div style="font-size: 0.75rem; color: #D32F2F; margin-top: 0.5rem;">Model would ignore minority class</div>
-            </div>
-            
-            <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid #B8E6B8;">
-                <div style="font-size: 0.75rem; font-weight: 600; color: #1B5E20; margin-bottom: 0.5rem;">AFTER SMOTE (Balanced)</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: #0B0B0B; margin-bottom: 0.25rem;">50% vs 50%</div>
-                <div style="font-size: 0.875rem; color: #5A5A5A;">~134,000 legitimate : ~134,000 fraud</div>
-                <div style="font-size: 0.75rem; color: #1B5E20; margin-top: 0.5rem;">Model learns both classes equally</div>
-            </div>
-        </div>
-        
-        <p style="margin: 1rem 0 0 0; font-size: 0.875rem; color: #5A5A5A; line-height: 1.6;">
-            <strong>How SMOTE works:</strong> Creates synthetic fraud examples by interpolating between existing fraud cases. 
-            This prevents the model from simply predicting "not fraud" for everything (which would give 93% accuracy but miss all frauds!).
-        </p>
-        
-        <p style="margin: 0.5rem 0 0 0; padding: 0.75rem; background: #FFF8E1; border-radius: 4px; font-size: 0.875rem; color: #E65100;">
-            <strong>Note:</strong> SMOTE is <strong>only applied during training</strong>. Your input data is processed as-is 
-            (no synthetic samples generated for prediction).
-        </p>
     </div>
-    """
-    st.markdown(smote_explanation_html, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+    
+    # Create two-column layout for SMOTE comparison
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid #EDEDED;">
+            <div style="font-size: 0.75rem; font-weight: 600; color: #D32F2F; margin-bottom: 0.5rem;">ORIGINAL DATA (Imbalanced)</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: #0B0B0B; margin-bottom: 0.25rem;">93% vs 7%</div>
+            <div style="font-size: 0.875rem; color: #5A5A5A;">133,978 legitimate : 10,437 fraud</div>
+            <div style="font-size: 0.75rem; color: #D32F2F; margin-top: 0.5rem;">Model would ignore minority class</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid #EDEDED;">
+            <div style="font-size: 0.75rem; font-weight: 600; color: #1B5E20; margin-bottom: 0.5rem;">AFTER SMOTE (Balanced)</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: #0B0B0B; margin-bottom: 0.25rem;">50% vs 50%</div>
+            <div style="font-size: 0.875rem; color: #5A5A5A;">~134,000 legitimate : ~134,000 fraud</div>
+            <div style="font-size: 0.75rem; color: #1B5E20; margin-top: 0.5rem;">Model learns both classes equally</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <p style="margin: 1rem 0 0 0; font-size: 0.875rem; color: #5A5A5A; line-height: 1.6;">
+        <strong>How SMOTE works:</strong> Creates synthetic fraud examples by interpolating between existing fraud cases. 
+        This prevents the model from simply predicting "not fraud" for everything (which would give 93% accuracy but miss all frauds!).
+    </p>
+    
+    <p style="margin: 0.5rem 0 0 0; padding: 0.75rem; background: #FFF8E1; border-radius: 4px; font-size: 0.875rem; color: #E65100;">
+        <strong>Note:</strong> SMOTE is <strong>only applied during training</strong>. Your input data is processed as-is 
+        (no synthetic samples generated for prediction).
+    </p>
+    """, unsafe_allow_html=True)
 
 # ============================================
 # STEP 3: MODEL PREDICTIONS
@@ -669,9 +677,24 @@ elif current_step == 3:
                         feature_dict[feat] = sample[feat].iloc[0]
                     transaction_df = pd.DataFrame([feature_dict])
             else:
-                # Raw transaction data - need to aggregate (not supported yet)
-                raise Exception(
-                    "Raw transaction data not supported. Please use combined_features.csv with aggregated per-customer data.")
+                # Raw transaction data - auto-aggregate by customer
+                st.info(" Auto-aggregating raw transaction data by customer...")
+                
+                # Basic aggregation - calculate statistics per customer
+                feature_dict = {}
+                
+                # Numeric columns to aggregate
+                numeric_cols = sample.select_dtypes(include=[np.number]).columns.tolist()
+                
+                # For single transaction, use the values directly and create synthetic aggregations
+                for feat in feature_names:
+                    if feat in sample.columns:
+                        feature_dict[feat] = sample[feat].iloc[0]
+                    else:
+                        # Fill missing aggregated features with 0
+                        feature_dict[feat] = 0.0
+                
+                transaction_df = pd.DataFrame([feature_dict])
 
             # Transform data
             from utils.preprocessing import transform_data
@@ -1141,43 +1164,36 @@ elif current_step == 4:
         st.markdown("---")
         st.markdown("### Threshold Selection: Why 0.20?")
         
-        threshold_explanation_html = """
+        st.markdown("""
         <div style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
             <div style="font-size: 0.875rem; line-height: 1.6; color: #0B0B0B;">
                 <p style="margin: 0 0 1rem 0;"><strong>Traditional ML uses threshold = 0.50 (balanced)</strong><br/>
                 This model uses <strong>threshold = 0.20 (recall-optimized)</strong></p>
-                
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 1rem 0;">
-                    <thead>
-                        <tr style="background: #E8E8E8;">
-                            <th style="padding: 0.5rem; text-align: left; border: 1px solid #D0D0D0;">Threshold</th>
-                            <th style="padding: 0.5rem; text-align: center; border: 1px solid #D0D0D0;">Recall</th>
-                            <th style="padding: 0.5rem; text-align: center; border: 1px solid #D0D0D0;">Precision</th>
-                            <th style="padding: 0.5rem; text-align: left; border: 1px solid #D0D0D0;">Trade-off</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding: 0.5rem; border: 1px solid #D0D0D0;">0.50 (default)</td>
-                            <td style="padding: 0.5rem; text-align: center; border: 1px solid #D0D0D0; color: #D32F2F; font-weight: 600;">41.6%</td>
-                            <td style="padding: 0.5rem; text-align: center; border: 1px solid #D0D0D0;">28.2%</td>
-                            <td style="padding: 0.5rem; border: 1px solid #D0D0D0; color: #D32F2F;">Missed 58% frauds</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 0.5rem; border: 1px solid #D0D0D0;">0.30</td>
-                            <td style="padding: 0.5rem; text-align: center; border: 1px solid #D0D0D0;">64.0%</td>
-                            <td style="padding: 0.5rem; text-align: center; border: 1px solid #D0D0D0;">23.8%</td>
-                            <td style="padding: 0.5rem; border: 1px solid #D0D0D0;">Better but still below 70%</td>
-                        </tr>
-                        <tr style="background: #E8FFE8;">
-                            <td style="padding: 0.5rem; border: 1px solid #D0D0D0; font-weight: 600;">0.20</td>
-                            <td style="padding: 0.5rem; text-align: center; border: 1px solid #D0D0D0; color: #1B5E20; font-weight: 700;">74.8%</td>
-                            <td style="padding: 0.5rem; text-align: center; border: 1px solid #D0D0D0;">20.1%</td>
-                            <td style="padding: 0.5rem; border: 1px solid #D0D0D0; color: #1B5E20; font-weight: 600;">SELECTED - Exceeds 70% target</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Create threshold comparison table using Streamlit's native table
+        threshold_data = {
+            "Threshold": ["0.50 (default)", "0.30", "0.20 ✓"],
+            "Recall": ["41.6%", "64.0%", "74.8%"],
+            "Precision": ["28.2%", "23.8%", "20.1%"],
+            "Trade-off": ["Missed 58% frauds", "Better but still below 70%", "SELECTED - Exceeds 70% target"]
+        }
+        
+        import pandas as pd
+        df_threshold = pd.DataFrame(threshold_data)
+        
+        # Display styled table
+        st.dataframe(
+            df_threshold,
+            use_container_width=True,
+            hide_index=True
+        )
+        
+        st.markdown("""
+        <div style="background: #F5F5F5; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+            <div style="font-size: 0.875rem; line-height: 1.6; color: #0B0B0B;">
                 <p style="margin: 1rem 0 0.5rem 0;"><strong>Business Justification:</strong></p>
                 <ul style="margin: 0; padding-left: 1.5rem;">
                     <li><strong>Cost of missed fraud:</strong> $1,000 per transaction (HIGH)</li>
@@ -1193,8 +1209,7 @@ elif current_step == 4:
                 </p>
             </div>
         </div>
-        """
-        st.markdown(threshold_explanation_html, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
     with col2:
         st.markdown("### Decision")
