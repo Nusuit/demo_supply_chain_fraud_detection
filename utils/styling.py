@@ -1,7 +1,7 @@
 """
-Custom CSS Styling for Monochrome Design
-Black/White/Gray color scheme with Inter font
-No icons, minimalist approach
+Custom CSS Styling for Light Blue Theme
+White/Light Blue color scheme with Inter font
+Clean and friendly design
 """
 
 import streamlit as st
@@ -16,6 +16,9 @@ def inject_custom_css():
     <style>
     /* Import Inter Font */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    /* Import Material Icons (for Streamlit expander icons) */
+    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
     /* ============================================
        GLOBAL STYLES
@@ -26,13 +29,13 @@ def inject_custom_css():
     }
 
     body {
-        color: #0B0B0B;
-        background-color: #F5F5F5;
+        color: #1565C0;
+        background-color: #E3F2FD;
     }
 
     /* Main container */
     .main {
-        background-color: #F5F5F5;
+        background-color: #E3F2FD;
     }
 
     /* Remove default Streamlit branding colors */
@@ -45,24 +48,24 @@ def inject_custom_css():
        ============================================ */
 
     h1 {
-        color: #0B0B0B;
+        color: #1565C0;
         font-weight: 800;
         letter-spacing: -0.02em;
     }
 
     h2 {
-        color: #0B0B0B;
+        color: #1976D2;
         font-weight: 700;
         letter-spacing: -0.01em;
     }
 
     h3 {
-        color: #0B0B0B;
+        color: #1976D2;
         font-weight: 600;
     }
 
     p {
-        color: #5A5A5A;
+        color: #1565C0;
         line-height: 1.6;
     }
 
@@ -72,14 +75,14 @@ def inject_custom_css():
 
     [data-testid="stMetric"] {
         background: white;
-        border: 1px solid #EDEDED;
+        border: 1px solid #BBDEFB;
         border-radius: 12px;
         padding: 1.5rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 3px rgba(33, 150, 243, 0.1);
     }
 
     [data-testid="stMetric"] label {
-        color: #5A5A5A !important;
+        color: #1976D2 !important;
         font-size: 0.875rem;
         font-weight: 500;
         text-transform: uppercase;
@@ -87,7 +90,7 @@ def inject_custom_css():
     }
 
     [data-testid="stMetric"] [data-testid="stMetricValue"] {
-        color: #0B0B0B !important;
+        color: #1565C0 !important;
         font-size: 2rem;
         font-weight: 700;
     }
@@ -100,10 +103,10 @@ def inject_custom_css():
        BUTTONS
        ============================================ */
 
-    /* Primary Button (Gray instead of Black) */
+    /* Primary Button (Blue) */
     .stButton>button {
-        background-color: #5A5A5A;
-        color: white;
+        background-color: #2196F3;
+        color: white !important;
         border: none;
         border-radius: 8px;
         padding: 0.625rem 1.5rem;
@@ -113,25 +116,31 @@ def inject_custom_css():
     }
 
     .stButton>button:hover {
-        background-color: #404040;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #1976D2;
+        color: white !important;  /* Force white text on hover */
+        box-shadow: 0 4px 6px rgba(33, 150, 243, 0.3);
     }
 
     .stButton>button:active {
-        background-color: #5A5A5A;
+        background-color: #1565C0;
+        color: white !important;  /* Force white text on active */
         transform: scale(0.98);
     }
 
-    /* Secondary Button (Outline) */
+    /* Secondary Button (Outline) - Make text much darker */
     .stButton>button[kind="secondary"] {
         background-color: white;
-        color: #5A5A5A;
-        border: 1px solid #EDEDED;
+        color: #01579B !important;  /* Very dark blue - much more visible */
+        border: 2px solid #1976D2;  /* Thicker, darker border */
+        font-weight: 700 !important;  /* Extra bold */
+        font-size: 0.9375rem;
     }
 
     .stButton>button[kind="secondary"]:hover {
-        background-color: #F5F5F5;
-        border-color: #5A5A5A;
+        background-color: #E3F2FD;
+        border-color: #01579B !important;  /* Very dark border on hover */
+        color: #004D8D !important;  /* Even darker on hover */
+        font-weight: 700 !important;
     }
 
     /* ============================================
@@ -140,7 +149,7 @@ def inject_custom_css():
 
     [data-baseweb="tab-list"] {
         background-color: white;
-        border: 1px solid #EDEDED;
+        border: 1px solid #BBDEFB;
         border-radius: 8px;
         padding: 0.25rem;
         gap: 0.25rem;
@@ -148,7 +157,7 @@ def inject_custom_css():
 
     [data-baseweb="tab"] {
         background-color: transparent;
-        color: #5A5A5A;
+        color: #1976D2;
         border: none;
         border-radius: 6px;
         font-weight: 500;
@@ -157,12 +166,12 @@ def inject_custom_css():
     }
 
     [data-baseweb="tab"]:hover {
-        background-color: #F5F5F5;
-        color: #0B0B0B;
+        background-color: #E3F2FD;
+        color: #1565C0;
     }
 
     [data-baseweb="tab"][aria-selected="true"] {
-        background-color: #5A5A5A !important;
+        background-color: #2196F3 !important;
         color: #FFFFFF !important;
         font-weight: 600;
     }
@@ -181,10 +190,10 @@ def inject_custom_css():
     [data-testid="stTextInput"] input,
     [data-testid="stNumberInput"] input,
     [data-testid="stSelectbox"] select {
-        border: 1px solid #EDEDED;
+        border: 1px solid #BBDEFB;
         border-radius: 8px;
         padding: 0.625rem 0.875rem;
-        color: #0B0B0B;
+        color: #1565C0;
         background-color: white;
         font-size: 0.9375rem;
     }
@@ -192,8 +201,8 @@ def inject_custom_css():
     [data-testid="stTextInput"] input:focus,
     [data-testid="stNumberInput"] input:focus,
     [data-testid="stSelectbox"] select:focus {
-        border-color: #0B0B0B;
-        box-shadow: 0 0 0 3px rgba(11, 11, 11, 0.05);
+        border-color: #2196F3;
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.15);
         outline: none;
     }
 
@@ -201,7 +210,7 @@ def inject_custom_css():
     [data-testid="stTextInput"] label,
     [data-testid="stNumberInput"] label,
     [data-testid="stSelectbox"] label {
-        color: #0B0B0B;
+        color: #1976D2;
         font-weight: 500;
         font-size: 0.875rem;
         margin-bottom: 0.5rem;
@@ -213,23 +222,62 @@ def inject_custom_css():
 
     [data-testid="stVerticalBlock"] > div > div > div[data-testid="stVerticalBlock"] {
         background-color: white;
-        border: 1px solid #EDEDED;
+        border: 1px solid #BBDEFB;
         border-radius: 12px;
         padding: 1.5rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 3px rgba(33, 150, 243, 0.1);
     }
 
     /* Expander */
     [data-testid="stExpander"] {
         background-color: white;
-        border: 1px solid #EDEDED;
+        border: 1px solid #BBDEFB;
         border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 3px rgba(33, 150, 243, 0.1);
     }
 
     [data-testid="stExpander"] summary {
-        color: #0B0B0B;
+        color: #1976D2;
         font-weight: 600;
+    }
+
+    /* Hide the arrow icon (keyboard_arrow_right/down) in expander */
+    [data-testid="stExpander"] summary::before,
+    [data-testid="stExpander"] details summary::before,
+    [data-testid="stExpander"] svg,
+    [data-testid="stExpander"] summary svg {
+        display: none !important;
+    }
+
+    /* Hide text fallback when Material Icons don't load (hides "keyboard_arrow_right" text) */
+    [data-testid="stExpander"] summary .material-icons,
+    [data-testid="stExpander"] summary span[class*="material"],
+    [data-testid="stExpander"] summary [class*="icon"],
+    [data-testid="stExpander"] [class*="Icon"],
+    [data-testid="stExpanderToggleIcon"] {
+        display: none !important;
+        visibility: hidden !important;
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* Nuclear option: Hide all direct children except the text label */
+    [data-testid="stExpander"] summary > span:first-child,
+    [data-testid="stExpander"] summary > div:first-child {
+        display: none !important;
+    }
+
+    /* Keep only the text label visible */
+    [data-testid="stExpander"] summary {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Adjust padding since icon is hidden */
+    [data-testid="stExpander"] summary {
+        padding-left: 1rem;
     }
 
     /* ============================================
@@ -237,11 +285,11 @@ def inject_custom_css():
        ============================================ */
 
     [data-testid="stProgress"] > div > div {
-        background-color: #EDEDED;
+        background-color: #BBDEFB;
     }
 
     [data-testid="stProgress"] > div > div > div {
-        background-color: #0B0B0B;
+        background-color: #2196F3;
     }
 
     /* ============================================
@@ -250,14 +298,14 @@ def inject_custom_css():
 
     [data-testid="stTable"],
     .dataframe {
-        border: 1px solid #EDEDED;
+        border: 1px solid #BBDEFB;
         border-radius: 8px;
         overflow: hidden;
     }
 
     [data-testid="stTable"] th,
     .dataframe thead th {
-        background-color: #0B0B0B;
+        background-color: #2196F3;
         color: white;
         font-weight: 600;
         text-transform: uppercase;
@@ -270,13 +318,13 @@ def inject_custom_css():
     [data-testid="stTable"] td,
     .dataframe tbody td {
         padding: 0.75rem 0.875rem;
-        border-bottom: 1px solid #EDEDED;
-        color: #0B0B0B;
+        border-bottom: 1px solid #BBDEFB;
+        color: #1565C0;
     }
 
     [data-testid="stTable"] tr:hover,
     .dataframe tbody tr:hover {
-        background-color: #F5F5F5;
+        background-color: #E3F2FD;
     }
 
     /* ============================================
@@ -285,17 +333,17 @@ def inject_custom_css():
 
     [data-testid="stFileUploader"] {
         background-color: white;
-        border: 2px dashed #EDEDED;
+        border: 2px dashed #BBDEFB;
         border-radius: 8px;
         padding: 2rem;
     }
 
     [data-testid="stFileUploader"]:hover {
-        border-color: #0B0B0B;
+        border-color: #2196F3;
     }
 
     [data-testid="stFileUploader"] label {
-        color: #0B0B0B;
+        color: #1976D2;
         font-weight: 600;
     }
 
@@ -303,28 +351,68 @@ def inject_custom_css():
        ALERTS / INFO BOXES
        ============================================ */
 
-    [data-testid="stAlert"] {
+    /* Fix for st.info, st.success, st.warning - prevent black text */
+    [data-testid="stAlert"],
+    [data-testid="stNotification"],
+    .stAlert {
         background-color: white;
-        border-left: 4px solid #0B0B0B;
+        border-left: 4px solid #2196F3;
         border-radius: 8px;
         padding: 1rem 1.25rem;
-        color: #0B0B0B;
+        color: #1565C0 !important;
+        box-shadow: 0 1px 3px rgba(33, 150, 243, 0.1);
     }
 
-    [data-testid="stAlert"][data-baseweb="notification"] {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    /* Ensure text inside alerts is not black */
+    [data-testid="stAlert"] p,
+    [data-testid="stAlert"] div,
+    [data-testid="stAlert"] span,
+    [data-testid="stNotification"] p,
+    [data-testid="stNotification"] div,
+    [data-testid="stNotification"] span,
+    .stAlert p,
+    .stAlert div,
+    .stAlert span {
+        color: #1565C0 !important;
     }
 
-    /* Success - use dark gray instead of green */
+    /* Success - use green */
+    [data-testid="stAlert"][data-baseweb="notification"]:has(.success),
     .success-alert {
-        border-left-color: #2A2A2A;
-        background-color: #F5F5F5;
+        border-left-color: #4CAF50;
+        background-color: #E8F5E9;
     }
 
-    /* Warning - use medium gray */
+    [data-testid="stAlert"][data-baseweb="notification"]:has(.success) p,
+    [data-testid="stAlert"][data-baseweb="notification"]:has(.success) div,
+    .success-alert p,
+    .success-alert div {
+        color: #2E7D32 !important;
+    }
+
+    /* Warning - use orange */
+    [data-testid="stAlert"][data-baseweb="notification"]:has(.warning),
     .warning-alert {
-        border-left-color: #5A5A5A;
-        background-color: #EDEDED;
+        border-left-color: #FF9800;
+        background-color: #FFF3E0;
+    }
+
+    [data-testid="stAlert"][data-baseweb="notification"]:has(.warning) p,
+    [data-testid="stAlert"][data-baseweb="notification"]:has(.warning) div,
+    .warning-alert p,
+    .warning-alert div {
+        color: #E65100 !important;
+    }
+
+    /* Error - use red */
+    [data-testid="stAlert"][data-baseweb="notification"]:has(.error) {
+        border-left-color: #F44336;
+        background-color: #FFEBEE;
+    }
+
+    [data-testid="stAlert"][data-baseweb="notification"]:has(.error) p,
+    [data-testid="stAlert"][data-baseweb="notification"]:has(.error) div {
+        color: #C62828 !important;
     }
 
     /* ============================================
@@ -333,7 +421,7 @@ def inject_custom_css():
 
     .js-plotly-plot {
         background-color: white;
-        border: 1px solid #EDEDED;
+        border: 1px solid #BBDEFB;
         border-radius: 12px;
         padding: 1rem;
     }
@@ -344,13 +432,13 @@ def inject_custom_css():
 
     [data-testid="stSidebar"] {
         background-color: white;
-        border-right: 1px solid #EDEDED;
+        border-right: 1px solid #BBDEFB;
     }
 
     [data-testid="stSidebar"] [data-testid="stMarkdown"] h1,
     [data-testid="stSidebar"] [data-testid="stMarkdown"] h2,
     [data-testid="stSidebar"] [data-testid="stMarkdown"] h3 {
-        color: #0B0B0B;
+        color: #1976D2;
     }
 
     /* ============================================
@@ -360,16 +448,16 @@ def inject_custom_css():
     /* Card container */
     .monochrome-card {
         background: white;
-        border: 1px solid #EDEDED;
+        border: 1px solid #BBDEFB;
         border-radius: 12px;
         padding: 1.5rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 3px rgba(33, 150, 243, 0.1);
         margin-bottom: 1rem;
     }
 
     /* Section header */
     .section-header {
-        color: #0B0B0B;
+        color: #1976D2;
         font-size: 1.5rem;
         font-weight: 700;
         margin-bottom: 1rem;
@@ -378,7 +466,7 @@ def inject_custom_css():
 
     /* Subsection header */
     .subsection-header {
-        color: #0B0B0B;
+        color: #1976D2;
         font-size: 1.125rem;
         font-weight: 600;
         margin-bottom: 0.75rem;
@@ -386,7 +474,7 @@ def inject_custom_css():
 
     /* Muted text */
     .text-muted {
-        color: #5A5A5A;
+        color: #424242;
         font-size: 0.875rem;
     }
 
@@ -394,7 +482,7 @@ def inject_custom_css():
     .monochrome-badge {
         display: inline-block;
         padding: 0.25rem 0.75rem;
-        background-color: #0B0B0B;
+        background-color: #2196F3;
         color: white;
         border-radius: 6px;
         font-size: 0.75rem;
@@ -408,8 +496,8 @@ def inject_custom_css():
         display: inline-block;
         padding: 0.25rem 0.75rem;
         background-color: transparent;
-        color: #0B0B0B;
-        border: 1px solid #EDEDED;
+        color: #2196F3;
+        border: 1px solid #BBDEFB;
         border-radius: 6px;
         font-size: 0.75rem;
         font-weight: 600;
@@ -420,7 +508,7 @@ def inject_custom_css():
     /* Divider */
     .monochrome-divider {
         height: 1px;
-        background-color: #EDEDED;
+        background-color: #BBDEFB;
         margin: 2rem 0;
     }
 
@@ -471,7 +559,7 @@ def inject_custom_css():
 
 def create_metric_card(label, value, description=""):
     """
-    Create a custom monochrome metric card
+    Create a custom light blue metric card
 
     Args:
         label: Metric label (e.g., "Recall")
@@ -480,10 +568,10 @@ def create_metric_card(label, value, description=""):
     """
     return f"""
     <div class="monochrome-card">
-        <div style="color: #5A5A5A; font-size: 0.875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+        <div style="color: #1976D2; font-size: 0.875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">
             {label}
         </div>
-        <div style="color: #0B0B0B; font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;">
+        <div style="color: #1565C0; font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;">
             {value}
         </div>
         {f'<div class="text-muted">{description}</div>' if description else ''}

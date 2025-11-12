@@ -1,0 +1,278 @@
+{
+  "network_stats": {
+    "total_nodes": 1254,
+    "total_edges": 3876,
+    "num_customers": 1000,
+    "num_products": 254,
+    "avg_degree": 6.18,
+    "density": 0.0049,
+    "clustering_coefficient": 0.312,
+    "num_connected_components": 12
+  },
+  "top_products": [
+    {
+      "product_id": "FIELD",
+      "product_name": "Field Watch",
+      "customers": 156,
+      "fraud_ratio": 0.089,
+      "avg_order_value": 45.67,
+      "centrality": 0.124
+    },
+    {
+      "product_id": "PERFECT",
+      "product_name": "Perfect Fitness",
+      "customers": 142,
+      "fraud_ratio": 0.085,
+      "avg_order_value": 52.3,
+      "centrality": 0.113
+    },
+    {
+      "product_id": "SMART",
+      "product_name": "Smart Watch",
+      "customers": 138,
+      "fraud_ratio": 0.072,
+      "avg_order_value": 89.45,
+      "centrality": 0.11
+    },
+    {
+      "product_id": "NIKE",
+      "product_name": "Nike Shoes",
+      "customers": 129,
+      "fraud_ratio": 0.078,
+      "avg_order_value": 67.89,
+      "centrality": 0.103
+    },
+    {
+      "product_id": "ADIDAS",
+      "product_name": "Adidas Shoes",
+      "customers": 121,
+      "fraud_ratio": 0.066,
+      "avg_order_value": 72.15,
+      "centrality": 0.096
+    },
+    {
+      "product_id": "LAPTOP",
+      "product_name": "Laptop Computer",
+      "customers": 98,
+      "fraud_ratio": 0.102,
+      "avg_order_value": 845.5,
+      "centrality": 0.078
+    },
+    {
+      "product_id": "IPHONE",
+      "product_name": "iPhone 13",
+      "customers": 87,
+      "fraud_ratio": 0.115,
+      "avg_order_value": 999.0,
+      "centrality": 0.069
+    },
+    {
+      "product_id": "SAMSUNG",
+      "product_name": "Samsung Galaxy",
+      "customers": 82,
+      "fraud_ratio": 0.098,
+      "avg_order_value": 799.0,
+      "centrality": 0.065
+    },
+    {
+      "product_id": "HEADPHONES",
+      "product_name": "Wireless Headphones",
+      "customers": 76,
+      "fraud_ratio": 0.079,
+      "avg_order_value": 125.99,
+      "centrality": 0.061
+    },
+    {
+      "product_id": "TABLET",
+      "product_name": "Tablet 10 inch",
+      "customers": 68,
+      "fraud_ratio": 0.088,
+      "avg_order_value": 349.99,
+      "centrality": 0.054
+    }
+  ],
+  "fraud_rings": [
+    {
+      "ring_id": 1,
+      "size": 23,
+      "fraud_count": 18,
+      "fraud_ratio": 0.783,
+      "avg_transactions": 8.5,
+      "total_loss": 12450.0,
+      "common_products": ["FIELD", "PERFECT", "SMART"],
+      "description": "High-activity fraud ring targeting watches and fitness products"
+    },
+    {
+      "ring_id": 2,
+      "size": 17,
+      "fraud_count": 14,
+      "fraud_ratio": 0.824,
+      "avg_transactions": 6.2,
+      "total_loss": 23890.0,
+      "common_products": ["LAPTOP", "IPHONE", "SAMSUNG"],
+      "description": "Electronics fraud ring focusing on high-value items"
+    },
+    {
+      "ring_id": 3,
+      "size": 19,
+      "fraud_count": 12,
+      "fraud_ratio": 0.632,
+      "avg_transactions": 7.8,
+      "total_loss": 8920.0,
+      "common_products": ["NIKE", "ADIDAS", "SMART"],
+      "description": "Moderate-size ring targeting sports equipment"
+    },
+    {
+      "ring_id": 4,
+      "size": 15,
+      "fraud_count": 11,
+      "fraud_ratio": 0.733,
+      "avg_transactions": 5.4,
+      "total_loss": 15670.0,
+      "common_products": ["IPHONE", "HEADPHONES", "TABLET"],
+      "description": "Mobile device fraud network"
+    },
+    {
+      "ring_id": 5,
+      "size": 12,
+      "fraud_count": 9,
+      "fraud_ratio": 0.75,
+      "avg_transactions": 9.1,
+      "total_loss": 7830.0,
+      "common_products": ["PERFECT", "NIKE", "SMART"],
+      "description": "Small but active ring with mixed product targets"
+    },
+    {
+      "ring_id": 6,
+      "size": 21,
+      "fraud_count": 8,
+      "fraud_ratio": 0.381,
+      "avg_transactions": 4.2,
+      "total_loss": 5420.0,
+      "common_products": ["FIELD", "ADIDAS", "HEADPHONES"],
+      "description": "Lower fraud ratio but large network size"
+    },
+    {
+      "ring_id": 7,
+      "size": 10,
+      "fraud_count": 7,
+      "fraud_ratio": 0.7,
+      "avg_transactions": 6.8,
+      "total_loss": 18920.0,
+      "common_products": ["LAPTOP", "SAMSUNG", "TABLET"],
+      "description": "High-value electronics targeting group"
+    },
+    {
+      "ring_id": 8,
+      "size": 14,
+      "fraud_count": 6,
+      "fraud_ratio": 0.429,
+      "avg_transactions": 3.9,
+      "total_loss": 4210.0,
+      "common_products": ["SMART", "NIKE", "HEADPHONES"],
+      "description": "Mid-range fraud network with diverse products"
+    }
+  ],
+  "centrality_analysis": {
+    "top_degree_customers": [
+      {
+        "customer_id": "C_12034",
+        "degree": 18,
+        "is_fraud": 1,
+        "fraud_prob": 0.89
+      },
+      {
+        "customer_id": "C_8765",
+        "degree": 16,
+        "is_fraud": 1,
+        "fraud_prob": 0.92
+      },
+      {
+        "customer_id": "C_15432",
+        "degree": 15,
+        "is_fraud": 0,
+        "fraud_prob": 0.23
+      },
+      {
+        "customer_id": "C_9821",
+        "degree": 14,
+        "is_fraud": 1,
+        "fraud_prob": 0.87
+      },
+      {
+        "customer_id": "C_11256",
+        "degree": 13,
+        "is_fraud": 0,
+        "fraud_prob": 0.18
+      }
+    ],
+    "top_betweenness_customers": [
+      { "customer_id": "C_7654", "betweenness": 0.0234, "is_fraud": 1 },
+      { "customer_id": "C_13290", "betweenness": 0.0189, "is_fraud": 1 },
+      { "customer_id": "C_10567", "betweenness": 0.0156, "is_fraud": 0 },
+      { "customer_id": "C_8934", "betweenness": 0.0142, "is_fraud": 1 },
+      { "customer_id": "C_14821", "betweenness": 0.0128, "is_fraud": 0 }
+    ]
+  },
+  "community_detection": {
+    "num_communities": 8,
+    "modularity": 0.412,
+    "communities": [
+      {
+        "community_id": 1,
+        "size": 156,
+        "fraud_ratio": 0.078,
+        "primary_products": ["FIELD", "PERFECT", "SMART"]
+      },
+      {
+        "community_id": 2,
+        "size": 142,
+        "fraud_ratio": 0.113,
+        "primary_products": ["LAPTOP", "IPHONE", "SAMSUNG"]
+      },
+      {
+        "community_id": 3,
+        "size": 138,
+        "fraud_ratio": 0.065,
+        "primary_products": ["NIKE", "ADIDAS", "SMART"]
+      },
+      {
+        "community_id": 4,
+        "size": 129,
+        "fraud_ratio": 0.089,
+        "primary_products": ["HEADPHONES", "TABLET", "IPHONE"]
+      },
+      {
+        "community_id": 5,
+        "size": 98,
+        "fraud_ratio": 0.102,
+        "primary_products": ["FIELD", "NIKE", "PERFECT"]
+      },
+      {
+        "community_id": 6,
+        "size": 87,
+        "fraud_ratio": 0.057,
+        "primary_products": ["SAMSUNG", "TABLET", "LAPTOP"]
+      },
+      {
+        "community_id": 7,
+        "size": 76,
+        "fraud_ratio": 0.092,
+        "primary_products": ["ADIDAS", "SMART", "HEADPHONES"]
+      },
+      {
+        "community_id": 8,
+        "size": 68,
+        "fraud_ratio": 0.044,
+        "primary_products": ["PERFECT", "FIELD", "NIKE"]
+      }
+    ]
+  },
+  "network_features": {
+    "avg_clustering": 0.312,
+    "avg_path_length": 3.87,
+    "diameter": 12,
+    "assortativity": -0.089,
+    "transitivity": 0.298
+  }
+}

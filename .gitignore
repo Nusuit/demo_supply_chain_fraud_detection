@@ -26,6 +26,7 @@ wheels/
 # Backup files
 *_OLD_BACKUP.py
 *_backup.py
+*.bak
 
 # Debug/analysis files
 DEBUG_*.md
@@ -44,16 +45,47 @@ fix_*.py
 # models/*.pkl
 # data/*.csv
 
+# Streamlit cache
+.streamlit/
+*.streamlit/
+
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+.history/
 
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# Streamlit
-.streamlit/secrets.toml
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# Node modules (if any)
+node_modules/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json

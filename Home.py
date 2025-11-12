@@ -46,13 +46,13 @@ if results:
     # ============================================
     st.markdown("""
     <div style="margin-bottom: 3rem;">
-        <h1 style="font-size: 2.5rem; font-weight: 800; color: #0B0B0B; letter-spacing: -0.02em; margin-bottom: 0.5rem; text-transform: uppercase;">
+        <h1 style="font-size: 2.5rem; font-weight: 800; color: #1565C0; letter-spacing: -0.02em; margin-bottom: 0.5rem; text-transform: uppercase;">
             Supply Chain Fraud Detection System
         </h1>
-        <h4 style="font-size: 1.25rem; font-weight: 600; color: #5A5A5A; margin-bottom: 0.75rem;">
+        <h4 style="font-size: 1.25rem; font-weight: 600; color: #1565C0; margin-bottom: 0.75rem;">
             Ensemble Deep Learning + Network Analysis
         </h4>
-        <p style="font-size: 0.875rem; color: #5A5A5A; margin: 0;">
+        <p style="font-size: 0.875rem; color: #1565C0; margin: 0;">
             Dashboard — model performance overview (static view)
         </p>
     </div>
@@ -65,13 +65,13 @@ if results:
 
     with col1:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #EDEDED; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 144px; display: flex; flex-direction: column; justify-content: space-between;">
-            <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A; text-transform: uppercase; letter-spacing: 0.05em;">RECALL</span>
-            <p style="font-size: 2.5rem; font-weight: 800; color: #0B0B0B; margin: 0.5rem 0; line-height: 1;">
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #BBDEFB; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 144px; display: flex; flex-direction: column; justify-content: space-between;">
+            <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0; text-transform: uppercase; letter-spacing: 0.05em;">RECALL</span>
+            <p style="font-size: 2.5rem; font-weight: 800; color: #1565C0; margin: 0.5rem 0; line-height: 1;">
                 {recall}%
             </p>
-            <span style="font-size: 0.75rem; color: #5A5A5A;">
-                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #0B0B0B; margin-right: 4px; vertical-align: middle;"></span>
+            <span style="font-size: 0.75rem; color: #1565C0;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2196F3; margin-right: 4px; vertical-align: middle;"></span>
                 ≥ 70% target — achieved
             </span>
         </div>
@@ -79,34 +79,34 @@ if results:
 
     with col2:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #EDEDED; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 144px; display: flex; flex-direction: column; justify-content: space-between;">
-            <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A; text-transform: uppercase; letter-spacing: 0.05em;">PRECISION</span>
-            <p style="font-size: 2.5rem; font-weight: 800; color: #0B0B0B; margin: 0.5rem 0; line-height: 1;">
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #BBDEFB; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 144px; display: flex; flex-direction: column; justify-content: space-between;">
+            <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0; text-transform: uppercase; letter-spacing: 0.05em;">PRECISION</span>
+            <p style="font-size: 2.5rem; font-weight: 800; color: #1565C0; margin: 0.5rem 0; line-height: 1;">
                 {precision}%
             </p>
-            <span style="font-size: 0.75rem; color: #5A5A5A;">Alert accuracy</span>
+            <span style="font-size: 0.75rem; color: #1565C0;">Alert accuracy</span>
         </div>
         """.format(precision=f"{metrics['precision']*100:.2f}"), unsafe_allow_html=True)
 
     with col3:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #EDEDED; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 144px; display: flex; flex-direction: column; justify-content: space-between;">
-            <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A; text-transform: uppercase; letter-spacing: 0.05em;">ROC-AUC</span>
-            <p style="font-size: 2.5rem; font-weight: 800; color: #0B0B0B; margin: 0.5rem 0; line-height: 1;">
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #BBDEFB; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 144px; display: flex; flex-direction: column; justify-content: space-between;">
+            <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0; text-transform: uppercase; letter-spacing: 0.05em;">ROC-AUC</span>
+            <p style="font-size: 2.5rem; font-weight: 800; color: #1565C0; margin: 0.5rem 0; line-height: 1;">
                 {roc_auc}%
             </p>
-            <span style="font-size: 0.75rem; color: #5A5A5A;">Discrimination power</span>
+            <span style="font-size: 0.75rem; color: #1565C0;">Discrimination power</span>
         </div>
         """.format(roc_auc=f"{metrics['roc_auc']*100:.2f}"), unsafe_allow_html=True)
 
     with col4:
         st.markdown("""
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #EDEDED; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 144px; display: flex; flex-direction: column; justify-content: space-between;">
-            <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A; text-transform: uppercase; letter-spacing: 0.05em;">NET BENEFIT</span>
-            <p style="font-size: 2.5rem; font-weight: 800; color: #0B0B0B; margin: 0.5rem 0; line-height: 1;">
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #BBDEFB; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 144px; display: flex; flex-direction: column; justify-content: space-between;">
+            <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0; text-transform: uppercase; letter-spacing: 0.05em;">NET BENEFIT</span>
+            <p style="font-size: 2.5rem; font-weight: 800; color: #1565C0; margin: 0.5rem 0; line-height: 1;">
                 $88,900
             </p>
-            <span style="font-size: 0.75rem; color: #5A5A5A;">vs. baseline</span>
+            <span style="font-size: 0.75rem; color: #1565C0;">vs. baseline</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -135,49 +135,49 @@ if results:
             </style>
         </head>
         <body>
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #EDEDED; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 100%;">
-            <h3 style="font-size: 1.25rem; font-weight: 600; color: #0B0B0B; margin-bottom: 0.25rem; font-family: 'Inter', sans-serif;">
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #BBDEFB; box-shadow: 0 1px 3px rgba(0,0,0,0.05); height: 100%;">
+            <h3 style="font-size: 1.25rem; font-weight: 600; color: #1565C0; margin-bottom: 0.25rem; font-family: 'Inter', sans-serif;">
                 Confusion Matrix
             </h3>
-            <p style="font-size: 0.875rem; color: #5A5A5A; margin-bottom: 1.5rem; font-family: 'Inter', sans-serif;">
+            <p style="font-size: 0.875rem; color: #1565C0; margin-bottom: 1.5rem; font-family: 'Inter', sans-serif;">
                 Threshold = 0.20 — Caught <strong>{cm['true_positive']}/{cm['true_positive'] + cm['false_negative']}</strong> frauds; Missed <strong>{cm['false_negative']}</strong>
             </p>
 
-            <table style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: center; font-family: 'Inter', sans-serif; overflow: hidden; border-radius: 8px; border: 1px solid #EDEDED;">
+            <table style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: center; font-family: 'Inter', sans-serif; overflow: hidden; border-radius: 8px; border: 1px solid #BBDEFB;">
                 <thead>
-                    <tr style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A; background: #F5F5F5;">
-                        <th style="padding: 0.875rem; border-right: 1px solid #EDEDED; border-bottom: 1px solid #EDEDED; text-align: left;">Predicted / Actual</th>
-                        <th style="padding: 0.875rem; border-right: 1px solid #EDEDED; border-bottom: 1px solid #EDEDED;">Actual Negative</th>
-                        <th style="padding: 0.875rem; border-bottom: 1px solid #EDEDED;">Actual Positive</th>
+                    <tr style="font-size: 0.875rem; font-weight: 600; color: #1565C0; background: #E3F2FD;">
+                        <th style="padding: 0.875rem; border-right: 1px solid #BBDEFB; border-bottom: 1px solid #BBDEFB; text-align: left;">Predicted / Actual</th>
+                        <th style="padding: 0.875rem; border-right: 1px solid #BBDEFB; border-bottom: 1px solid #BBDEFB;">Actual Negative</th>
+                        <th style="padding: 0.875rem; border-bottom: 1px solid #BBDEFB;">Actual Positive</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding: 1.25rem 0.875rem; background: #F5F5F5; font-size: 0.875rem; font-weight: 600; color: #5A5A5A; border-right: 1px solid #EDEDED; border-bottom: 1px solid #EDEDED; text-align: left;">
+                        <td style="padding: 1.25rem 0.875rem; background: #E3F2FD; font-size: 0.875rem; font-weight: 600; color: #1565C0; border-right: 1px solid #BBDEFB; border-bottom: 1px solid #BBDEFB; text-align: left;">
                             Predicted Negative (Safe)
                         </td>
-                        <td style="padding: 1.25rem; border-right: 1px solid #EDEDED; border-bottom: 1px solid #EDEDED; background: #F9F9F9; font-size: 1.125rem; font-weight: 700; color: #0B0B0B;">
-                            {cm['true_negative']:,} <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A;">(TN)</span>
+                        <td style="padding: 1.25rem; border-right: 1px solid #BBDEFB; border-bottom: 1px solid #BBDEFB; background: #F9F9F9; font-size: 1.125rem; font-weight: 700; color: #1565C0;">
+                            {cm['true_negative']:,} <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0;">(TN)</span>
                         </td>
-                        <td style="padding: 1.25rem; border-bottom: 1px solid #EDEDED; background: #D3D3D3; font-size: 1.125rem; font-weight: 700; color: #0B0B0B;">
-                            {cm['false_negative']} <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A;">(FN)</span>
+                        <td style="padding: 1.25rem; border-bottom: 1px solid #BBDEFB; background: #BBDEFB; font-size: 1.125rem; font-weight: 700; color: #1565C0;">
+                            {cm['false_negative']} <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0;">(FN)</span>
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding: 1.25rem 0.875rem; background: #F5F5F5; font-size: 0.875rem; font-weight: 600; color: #5A5A5A; border-right: 1px solid #EDEDED; text-align: left;">
+                        <td style="padding: 1.25rem 0.875rem; background: #E3F2FD; font-size: 0.875rem; font-weight: 600; color: #1565C0; border-right: 1px solid #BBDEFB; text-align: left;">
                             Predicted Positive (Fraud)
                         </td>
-                        <td style="padding: 1.25rem; border-right: 1px solid #EDEDED; background: #E8E8E8; font-size: 1.125rem; font-weight: 700; color: #0B0B0B;">
-                            {cm['false_positive']:,} <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A;">(FP)</span>
+                        <td style="padding: 1.25rem; border-right: 1px solid #BBDEFB; background: #E3F2FD; font-size: 1.125rem; font-weight: 700; color: #1565C0;">
+                            {cm['false_positive']:,} <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0;">(FP)</span>
                         </td>
-                        <td style="padding: 1.25rem; background: #0B0B0B; font-size: 1.125rem; font-weight: 700; color: white;">
+                        <td style="padding: 1.25rem; background: #2196F3; font-size: 1.125rem; font-weight: 700; color: white;">
                             {cm['true_positive']} <span style="font-size: 0.875rem; font-weight: 600; color: #C0C0C0;">(TP)</span>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <p style="font-size: 0.75rem; color: #5A5A5A; margin-top: 1rem; text-align: center; opacity: 0.7; font-family: 'Inter', sans-serif;">
+            <p style="font-size: 0.75rem; color: #1565C0; margin-top: 1rem; text-align: center; opacity: 0.7; font-family: 'Inter', sans-serif;">
                 Heatmap uses a monochrome (light gray to black) scale.
             </p>
         </div>
@@ -225,7 +225,7 @@ if results:
             y=tpr,
             mode='lines',
             name=f'ROC Curve',
-            line=dict(color='#0B0B0B', width=3),
+            line=dict(color='#2196F3', width=3),
             showlegend=False,
             hovertemplate='FPR: %{x:.3f}<br>TPR: %{y:.3f}<extra></extra>'
         ))
@@ -236,7 +236,7 @@ if results:
             y=[0, 1],
             mode='lines',
             name='Random Classifier',
-            line=dict(color='#5A5A5A', width=2, dash='dash'),
+            line=dict(color='#1565C0', width=2, dash='dash'),
             showlegend=False,
             hoverinfo='skip'
         ))
@@ -247,7 +247,7 @@ if results:
             y=[actual_tpr],
             mode='markers',
             name='Operating Point (threshold=0.20)',
-            marker=dict(color='#0B0B0B', size=8, symbol='circle'),
+            marker=dict(color='#2196F3', size=8, symbol='circle'),
             showlegend=False,
             hovertemplate=f'Operating Point<br>Threshold: 0.20<br>FPR: {actual_fpr:.3f}<br>TPR: {actual_tpr:.3f} (Recall)<extra></extra>'
         ))
@@ -258,8 +258,8 @@ if results:
                 title='False Positive Rate',
                 gridcolor='#F0F0F0',
                 linecolor='#EDEDED',
-                title_font=dict(color='#5A5A5A', family='Inter', size=11),
-                tickfont=dict(color='#5A5A5A', size=9),
+                title_font=dict(color='#1565C0', family='Inter', size=11),
+                tickfont=dict(color='#1565C0', size=9),
                 range=[0, 1],
                 showgrid=True,
                 zeroline=True,
@@ -269,8 +269,8 @@ if results:
                 title='True Positive Rate',
                 gridcolor='#F0F0F0',
                 linecolor='#EDEDED',
-                title_font=dict(color='#5A5A5A', family='Inter', size=11),
-                tickfont=dict(color='#5A5A5A', size=9),
+                title_font=dict(color='#1565C0', family='Inter', size=11),
+                tickfont=dict(color='#1565C0', size=9),
                 range=[0, 1],
                 showgrid=True,
                 zeroline=True,
@@ -278,7 +278,7 @@ if results:
             ),
             plot_bgcolor='white',
             paper_bgcolor='rgba(0,0,0,0)',
-            font=dict(family='Inter', color='#0B0B0B'),
+            font=dict(family='Inter', color='#1565C0'),
             height=320,
             margin=dict(l=50, r=10, t=5, b=45),
             hovermode='closest'
@@ -303,11 +303,11 @@ if results:
             </style>
         </head>
         <body>
-        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #EDEDED; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-            <h3 style="font-size: 1.25rem; font-weight: 600; color: #0B0B0B; margin-bottom: 0.25rem; font-family: 'Inter', sans-serif; margin-top: 0;">
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #BBDEFB; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="font-size: 1.25rem; font-weight: 600; color: #1565C0; margin-bottom: 0.25rem; font-family: 'Inter', sans-serif; margin-top: 0;">
                 ROC Curve
             </h3>
-            <p style="font-size: 0.875rem; color: #5A5A5A; margin-bottom: 1rem; font-family: 'Inter', sans-serif;">
+            <p style="font-size: 0.875rem; color: #1565C0; margin-bottom: 1rem; font-family: 'Inter', sans-serif;">
                 AUC = <strong>{metrics['roc_auc']:.4f}</strong>
             </p>
             {plotly_html}
@@ -338,40 +338,40 @@ if results:
         </style>
     </head>
     <body>
-    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #EDEDED; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-        <h3 style="font-size: 1.25rem; font-weight: 600; color: #0B0B0B; margin-bottom: 1.5rem; margin-top: 0;">
+    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #BBDEFB; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <h3 style="font-size: 1.25rem; font-weight: 600; color: #1565C0; margin-bottom: 1.5rem; margin-top: 0;">
             Model Details
         </h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
             <!-- Left Column -->
             <div>
                 <div style="display: flex; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(237, 237, 237, 0.5); margin-bottom: 0.75rem;">
-                    <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A;">Type:</span>
-                    <span style="font-size: 0.875rem; color: #0B0B0B; text-align: right;">Deep Neural Network Ensemble</span>
+                    <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0;">Type:</span>
+                    <span style="font-size: 0.875rem; color: #1565C0; text-align: right;">Deep Neural Network Ensemble</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(237, 237, 237, 0.5); margin-bottom: 0.75rem;">
-                    <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A;">Models:</span>
-                    <span style="font-size: 0.875rem; color: #0B0B0B; text-align: right;">3 (seeds {', '.join(map(str, model_info['seeds']))})</span>
+                    <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0;">Models:</span>
+                    <span style="font-size: 0.875rem; color: #1565C0; text-align: right;">3 (seeds {', '.join(map(str, model_info['seeds']))})</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; padding-bottom: 0.75rem;">
-                    <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A;">Architecture:</span>
-                    <span style="font-size: 0.875rem; color: #0B0B0B; text-align: right;">45 → 256 → 128 → 64 → 1</span>
+                    <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0;">Architecture:</span>
+                    <span style="font-size: 0.875rem; color: #1565C0; text-align: right;">45 → 256 → 128 → 64 → 1</span>
                 </div>
             </div>
 
             <!-- Right Column -->
             <div>
                 <div style="display: flex; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(237, 237, 237, 0.5); margin-bottom: 0.75rem;">
-                    <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A;">Features:</span>
-                    <span style="font-size: 0.875rem; color: #0B0B0B; text-align: right;">61 (57 transaction + 4 network)</span>
+                    <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0;">Features:</span>
+                    <span style="font-size: 0.875rem; color: #1565C0; text-align: right;">61 (57 transaction + 4 network)</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(237, 237, 237, 0.5); margin-bottom: 0.75rem;">
-                    <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A;">Loss:</span>
-                    <span style="font-size: 0.875rem; color: #0B0B0B; text-align: right;">Cost-Sensitive Focal Loss</span>
+                    <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0;">Loss:</span>
+                    <span style="font-size: 0.875rem; color: #1565C0; text-align: right;">Cost-Sensitive Focal Loss</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; padding-bottom: 0.75rem;">
-                    <span style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A;">Threshold:</span>
-                    <span style="font-size: 0.875rem; color: #0B0B0B; text-align: right;">0.20 (recall-oriented)</span>
+                    <span style="font-size: 0.875rem; font-weight: 600; color: #1565C0;">Threshold:</span>
+                    <span style="font-size: 0.875rem; color: #1565C0; text-align: right;">0.20 (recall-oriented)</span>
                 </div>
             </div>
         </div>
@@ -393,34 +393,34 @@ if results:
     
     with col1:
         st.markdown("""
-        <div style="background: #F5F5F5; padding: 1.5rem; border-radius: 12px; border: 2px solid #5A5A5A; text-align: center;">
-            <div style="font-size: 0.875rem; font-weight: 600; color: #0B0B0B; margin-bottom: 0.5rem;">FRAUDS CAUGHT</div>
-            <div style="font-size: 2rem; font-weight: 800; color: #0B0B0B; margin-bottom: 0.5rem;">214</div>
-            <div style="font-size: 0.875rem; color: #5A5A5A;">214 × $1,000</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #0B0B0B; margin-top: 0.5rem;">+$214,000</div>
-            <div style="font-size: 0.75rem; color: #5A5A5A; margin-top: 0.5rem;">Prevented losses</div>
+        <div style="background: #E3F2FD; padding: 1.5rem; border-radius: 12px; border: 2px solid #2196F3; text-align: center;">
+            <div style="font-size: 0.875rem; font-weight: 600; color: #1565C0; margin-bottom: 0.5rem;">FRAUDS CAUGHT</div>
+            <div style="font-size: 2rem; font-weight: 800; color: #1565C0; margin-bottom: 0.5rem;">214</div>
+            <div style="font-size: 0.875rem; color: #1565C0;">214 × $1,000</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: #1565C0; margin-top: 0.5rem;">+$214,000</div>
+            <div style="font-size: 0.75rem; color: #1565C0; margin-top: 0.5rem;">Prevented losses</div>
         </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
-        <div style="background: #EDEDED; padding: 1.5rem; border-radius: 12px; border: 2px solid #5A5A5A; text-align: center;">
-            <div style="font-size: 0.875rem; font-weight: 600; color: #0B0B0B; margin-bottom: 0.5rem;">FRAUDS MISSED</div>
-            <div style="font-size: 2rem; font-weight: 800; color: #0B0B0B; margin-bottom: 0.5rem;">72</div>
-            <div style="font-size: 0.875rem; color: #5A5A5A;">72 × $1,000</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #0B0B0B; margin-top: 0.5rem;">-$72,000</div>
-            <div style="font-size: 0.75rem; color: #5A5A5A; margin-top: 0.5rem;">Undetected losses</div>
+        <div style="background: #E3F2FD; padding: 1.5rem; border-radius: 12px; border: 2px solid #2196F3; text-align: center;">
+            <div style="font-size: 0.875rem; font-weight: 600; color: #1565C0; margin-bottom: 0.5rem;">FRAUDS MISSED</div>
+            <div style="font-size: 2rem; font-weight: 800; color: #1565C0; margin-bottom: 0.5rem;">72</div>
+            <div style="font-size: 0.875rem; color: #1565C0;">72 × $1,000</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: #1565C0; margin-top: 0.5rem;">-$72,000</div>
+            <div style="font-size: 0.75rem; color: #1565C0; margin-top: 0.5rem;">Undetected losses</div>
         </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown("""
-        <div style="background: #FAFAFA; padding: 1.5rem; border-radius: 12px; border: 2px solid #5A5A5A; text-align: center;">
-            <div style="font-size: 0.875rem; font-weight: 600; color: #0B0B0B; margin-bottom: 0.5rem;">INVESTIGATION COST</div>
-            <div style="font-size: 2rem; font-weight: 800; color: #0B0B0B; margin-bottom: 0.5rem;">1,062</div>
-            <div style="font-size: 0.875rem; color: #5A5A5A;">1,062 alerts × $50</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #0B0B0B; margin-top: 0.5rem;">-$53,100</div>
-            <div style="font-size: 0.75rem; color: #5A5A5A; margin-top: 0.5rem;">Operational overhead</div>
+        <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 2px solid #2196F3; text-align: center;">
+            <div style="font-size: 0.875rem; font-weight: 600; color: #1565C0; margin-bottom: 0.5rem;">INVESTIGATION COST</div>
+            <div style="font-size: 2rem; font-weight: 800; color: #1565C0; margin-bottom: 0.5rem;">1,062</div>
+            <div style="font-size: 0.875rem; color: #1565C0;">1,062 alerts × $50</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: #1565C0; margin-top: 0.5rem;">-$53,100</div>
+            <div style="font-size: 0.75rem; color: #1565C0; margin-top: 0.5rem;">Operational overhead</div>
         </div>
         """, unsafe_allow_html=True)
     
@@ -428,36 +428,36 @@ if results:
     
     # Net benefit calculation
     st.markdown("""
-    <div style="background: linear-gradient(135deg, #0B0B0B 0%, #2A2A2A 100%); padding: 2rem; border-radius: 12px; text-align: center; margin-bottom: 1rem; border: 2px solid #5A5A5A;">
-        <div style="font-size: 0.875rem; font-weight: 600; color: #FFFFFF; opacity: 0.8; margin-bottom: 0.5rem;">NET BENEFIT (vs. baseline)</div>
+    <div style="background: linear-gradient(135deg, #2196F3 0%, #1565C0 100%); padding: 2rem; border-radius: 12px; text-align: center; margin-bottom: 1rem; border: 2px solid #2196F3;">
+        <div style="font-size: 0.875rem; font-weight: 600; color: #FFFFFF; opacity: 0.9; margin-bottom: 0.5rem;">NET BENEFIT (vs. baseline)</div>
         <div style="font-size: 3rem; font-weight: 800; color: #FFFFFF; margin: 0.5rem 0;">$88,900</div>
-        <div style="font-size: 0.875rem; color: #FFFFFF; opacity: 0.7;">= $214,000 - $72,000 - $53,100</div>
+        <div style="font-size: 0.875rem; color: #FFFFFF; opacity: 0.8;">= $214,000 - $72,000 - $53,100</div>
     </div>
     """, unsafe_allow_html=True)
     
     # Comparison with other models
     st.markdown("""
-    <div style="background: #F5F5F5; padding: 1.5rem; border-radius: 12px; border: 1px solid #EDEDED;">
-        <h4 style="font-size: 1rem; font-weight: 600; color: #0B0B0B; margin-bottom: 1rem;">Comparison with Alternative Models</h4>
+    <div style="background: #E3F2FD; padding: 1.5rem; border-radius: 12px; border: 1px solid #BBDEFB;">
+        <h4 style="font-size: 1rem; font-weight: 600; color: #1565C0; margin-bottom: 1rem;">Comparison with Alternative Models</h4>
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-            <div style="text-align: center; padding: 1rem; background: #FAFAFA; border-radius: 8px; border: 1px solid #5A5A5A;">
-                <div style="font-size: 0.75rem; font-weight: 600; color: #5A5A5A; margin-bottom: 0.25rem;">ENSEMBLE (THIS MODEL)</div>
-                <div style="font-size: 1.75rem; font-weight: 800; color: #0B0B0B;">+$88,900</div>
-                <div style="font-size: 0.75rem; color: #5A5A5A; margin-top: 0.25rem;">PROFITABLE</div>
+            <div style="text-align: center; padding: 1rem; background: white; border-radius: 8px; border: 1px solid #2196F3;">
+                <div style="font-size: 0.75rem; font-weight: 600; color: #1565C0; margin-bottom: 0.25rem;">ENSEMBLE (THIS MODEL)</div>
+                <div style="font-size: 1.75rem; font-weight: 800; color: #1565C0;">+$88,900</div>
+                <div style="font-size: 0.75rem; color: #1565C0; margin-top: 0.25rem;">PROFITABLE</div>
             </div>
-            <div style="text-align: center; padding: 1rem; background: #EDEDED; border-radius: 8px; border: 1px solid #5A5A5A;">
-                <div style="font-size: 0.75rem; font-weight: 600; color: #5A5A5A; margin-bottom: 0.25rem;">SINGLE MODEL (BASELINE)</div>
-                <div style="font-size: 1.75rem; font-weight: 800; color: #0B0B0B;">-$69,100</div>
-                <div style="font-size: 0.75rem; color: #5A5A5A; margin-top: 0.25rem;">NET LOSS</div>
+            <div style="text-align: center; padding: 1rem; background: #E3F2FD; border-radius: 8px; border: 1px solid #2196F3;">
+                <div style="font-size: 0.75rem; font-weight: 600; color: #1565C0; margin-bottom: 0.25rem;">SINGLE MODEL (BASELINE)</div>
+                <div style="font-size: 1.75rem; font-weight: 800; color: #1565C0;">-$69,100</div>
+                <div style="font-size: 0.75rem; color: #1565C0; margin-top: 0.25rem;">NET LOSS</div>
             </div>
-            <div style="text-align: center; padding: 1rem; background: #E5E5E5; border-radius: 8px; border: 1px solid #5A5A5A;">
-                <div style="font-size: 0.75rem; font-weight: 600; color: #5A5A5A; margin-bottom: 0.25rem;">STACKING ENSEMBLE</div>
-                <div style="font-size: 1.75rem; font-weight: 800; color: #0B0B0B;">-$108,700</div>
-                <div style="font-size: 0.75rem; color: #5A5A5A; margin-top: 0.25rem;">SEVERE LOSS</div>
+            <div style="text-align: center; padding: 1rem; background: #BBDEFB; border-radius: 8px; border: 1px solid #2196F3;">
+                <div style="font-size: 0.75rem; font-weight: 600; color: #1565C0; margin-bottom: 0.25rem;">STACKING ENSEMBLE</div>
+                <div style="font-size: 1.75rem; font-weight: 800; color: #1565C0;">-$108,700</div>
+                <div style="font-size: 0.75rem; color: #1565C0; margin-top: 0.25rem;">SEVERE LOSS</div>
             </div>
         </div>
-        <div style="font-size: 0.875rem; color: #5A5A5A; text-align: center; line-height: 1.5;">
-            <strong style="color: #0B0B0B;">Conclusion:</strong> The Ensemble (AGGRESSIVE) model is the only configuration that achieves positive ROI,<br/>
+        <div style="font-size: 0.875rem; color: #1565C0; text-align: center; line-height: 1.5;">
+            <strong style="color: #1565C0;">Conclusion:</strong> The Ensemble (AGGRESSIVE) model is the only configuration that achieves positive ROI,<br/>
             justifying its deployment in production. The aggressive threshold (0.20) and cost-sensitive loss (FN_COST=15.0)<br/>
             enable high fraud detection rate while maintaining acceptable operational costs.
         </div>
@@ -472,11 +472,11 @@ else:
 # ============================================
 with st.sidebar:
     st.markdown("""
-    <div style="padding: 1rem 0; border-bottom: 1px solid #EDEDED; margin-bottom: 1.5rem;">
-        <h2 style="color: #0B0B0B; font-size: 1.125rem; font-weight: 700; margin: 0;">
+    <div style="padding: 1rem 0; border-bottom: 1px solid #BBDEFB; margin-bottom: 1.5rem;">
+        <h2 style="color: #1565C0; font-size: 1.125rem; font-weight: 700; margin: 0;">
             Fraud Detection
         </h2>
-        <p style="color: #5A5A5A; font-size: 0.875rem; margin: 0.25rem 0 0 0;">
+        <p style="color: #1565C0; font-size: 0.875rem; margin: 0.25rem 0 0 0;">
             Supply Chain Analysis
         </p>
     </div>
@@ -544,30 +544,30 @@ with st.sidebar:
     comparison_html = """
     <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 1rem 0;">
         <thead>
-            <tr style="background: #F5F5F5; border-bottom: 2px solid #EDEDED;">
-                <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #5A5A5A;">Model</th>
-                <th style="padding: 0.75rem; text-align: center; font-weight: 600; color: #5A5A5A;">Recall</th>
-                <th style="padding: 0.75rem; text-align: center; font-weight: 600; color: #5A5A5A;">Precision</th>
-                <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #5A5A5A;">Status</th>
+            <tr style="background: #E3F2FD; border-bottom: 2px solid #EDEDED;">
+                <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #1565C0;">Model</th>
+                <th style="padding: 0.75rem; text-align: center; font-weight: 600; color: #1565C0;">Recall</th>
+                <th style="padding: 0.75rem; text-align: center; font-weight: 600; color: #1565C0;">Precision</th>
+                <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #1565C0;">Status</th>
             </tr>
         </thead>
         <tbody>
-            <tr style="background: #E8FFE8; border-bottom: 1px solid #EDEDED;">
-                <td style="padding: 0.75rem; font-weight: 600; color: #0B0B0B;">Ensemble (AGGRESSIVE)</td>
-                <td style="padding: 0.75rem; text-align: center; font-weight: 700; color: #0B0B0B;">74.83%</td>
-                <td style="padding: 0.75rem; text-align: center; color: #5A5A5A;">20.15%</td>
-                <td style="padding: 0.75rem; color: #0B0B0B;"><strong>SELECTED</strong></td>
+            <tr style="background: #E8FFE8; border-bottom: 1px solid #BBDEFB;">
+                <td style="padding: 0.75rem; font-weight: 600; color: #1565C0;">Ensemble (AGGRESSIVE)</td>
+                <td style="padding: 0.75rem; text-align: center; font-weight: 700; color: #1565C0;">74.83%</td>
+                <td style="padding: 0.75rem; text-align: center; color: #1565C0;">20.15%</td>
+                <td style="padding: 0.75rem; color: #1565C0;"><strong>SELECTED</strong></td>
             </tr>
-            <tr style="border-bottom: 1px solid #EDEDED;">
-                <td style="padding: 0.75rem; color: #5A5A5A;">Single Model (Baseline)</td>
+            <tr style="border-bottom: 1px solid #BBDEFB;">
+                <td style="padding: 0.75rem; color: #1565C0;">Single Model (Baseline)</td>
                 <td style="padding: 0.75rem; text-align: center; color: #D32F2F;">41.61%</td>
-                <td style="padding: 0.75rem; text-align: center; color: #5A5A5A;">28.20%</td>
+                <td style="padding: 0.75rem; text-align: center; color: #1565C0;">28.20%</td>
                 <td style="padding: 0.75rem; color: #D32F2F;">Missed 58% of frauds</td>
             </tr>
-            <tr style="border-bottom: 1px solid #EDEDED;">
-                <td style="padding: 0.75rem; color: #5A5A5A;">Stacking Ensemble</td>
+            <tr style="border-bottom: 1px solid #BBDEFB;">
+                <td style="padding: 0.75rem; color: #1565C0;">Stacking Ensemble</td>
                 <td style="padding: 0.75rem; text-align: center; color: #D32F2F;">32.87%</td>
-                <td style="padding: 0.75rem; text-align: center; color: #5A5A5A;">43.93%</td>
+                <td style="padding: 0.75rem; text-align: center; color: #1565C0;">43.93%</td>
                 <td style="padding: 0.75rem; color: #D32F2F;">Missed 67% of frauds</td>
             </tr>
         </tbody>
@@ -603,7 +603,7 @@ with st.sidebar:
     st.markdown("### Model Performance")
     st.markdown("""
     - **Recall:** 74.83% (Target Achieved)
-    - **Precision:** 38.79%
+    - **Precision:** 50.00%
     - **ROC-AUC:** 82.16%
     - **Net Benefit:** $88,900
     """)

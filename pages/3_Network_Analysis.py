@@ -181,14 +181,14 @@ def create_network_graph_from_networkx(G, layout_type='spring', highlight_node=N
 
         # Styling based on type and fraud status
         if node_type == 'product':
-            node_colors.append('#333333')  # Dark gray
+            node_colors.append('#90CAF9')  # Light blue
             node_sizes.append(25)
             node_symbols.append('square')
             node_text.append(
                 f"Product: {node}<br>Degree: {G.degree(node)}")
         else:  # customer
             if is_fraud == 1:
-                node_colors.append('#000000')  # Black
+                node_colors.append('#1565C0')  # Blue
                 node_text.append(
                     f"FRAUD Customer: {node}<br>Degree: {G.degree(node)}")
             else:
@@ -219,8 +219,10 @@ def create_network_graph_from_networkx(G, layout_type='spring', highlight_node=N
     # Create figure
     fig = go.Figure(data=[edge_trace, node_trace],
                     layout=go.Layout(
-        title=f"Real Customer-Product Network ({len(G.nodes())} nodes, {len(G.edges())} edges)",
-        titlefont_size=16,
+        title=dict(
+            text=f"Real Customer-Product Network ({len(G.nodes())} nodes, {len(G.edges())} edges)",
+            font=dict(size=16)
+        ),
         showlegend=False,
         hovermode='closest',
         margin=dict(b=20, l=5, r=5, t=40),
@@ -268,7 +270,7 @@ def create_network_graph(sna_data):
         y = 0.5 + 0.3 * np.sin(angle)
         node_x.append(x)
         node_y.append(y)
-        node_colors.append('#333333')  # Dark gray for products - more visible
+        node_colors.append('#90CAF9')  # Light blue for products - more visible
         node_sizes.append(35)
         node_text.append(
             f"Product {product['product_id']}<br>{product['customers']} customers")
@@ -293,7 +295,7 @@ def create_network_graph(sna_data):
             radius = np.random.uniform(0.6, 0.9)
             node_x.append(0.5 + radius * np.cos(angle))
             node_y.append(0.5 + radius * np.sin(angle))
-            node_colors.append('#000000')  # Black for fraud - highly visible
+            node_colors.append('#1565C0')  # Blue for fraud - highly visible
             node_sizes.append(13)
             node_text.append(f"Fraud Customer<br>Ring #{ring['ring_id']}")
 
@@ -367,6 +369,30 @@ if transaction_df is not None and data_type is not None:
 # ============================================
 st.title("Network Analysis")
 st.markdown("Real customer-product network from transaction data")
+
+# Add explanation about connection to model features
+st.markdown("""
+<div style="background: #E3F2FD; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2196F3; margin: 1.5rem 0;">
+    <h3 style="font-size: 1.125rem; font-weight: 700; color: #0D47A1; margin: 0 0 0.75rem 0;">
+        🔗 Connection to AI Fraud Detection Model
+    </h3>
+    <p style="font-size: 0.875rem; color: #1565C0; line-height: 1.6; margin: 0;">
+        The network metrics calculated from this customer-product graph are used as <strong>4 important input features</strong> 
+        for the fraud detection model (out of 61 total features):
+    </p>
+    <ul style="font-size: 0.875rem; color: #1976D2; line-height: 1.8; margin: 0.75rem 0 0 1.5rem;">
+        <li><strong>degree_centrality</strong> - How many products a customer buys (well-connected vs isolated)</li>
+        <li><strong>betweenness_centrality</strong> - Bridge position in network (key connector between groups)</li>
+        <li><strong>closeness_centrality</strong> - How close a customer is to all other nodes</li>
+        <li><strong>pagerank</strong> - Influence score in the network (like Google PageRank)</li>
+    </ul>
+    <p style="font-size: 0.875rem; color: #1565C0; line-height: 1.6; margin: 0.75rem 0 0 0;">
+        <strong>Why is this important?</strong> Fraudsters often form coordinated networks (fraud rings) with unusual connection patterns. 
+        These 4 network features help the AI detect suspicious "fraud rings" that simple transaction analysis would miss.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
 st.divider()
 
 # ============================================
@@ -376,7 +402,11 @@ with st.sidebar:
     st.header("⚙️ Network Controls")
 
     if G is not None:
-        st.success(f"Network loaded: **{len(G.nodes())} nodes**")
+        st.markdown(f"""
+        <div style="background-color: #E8F5E9; border-left: 4px solid #4CAF50; border-radius: 8px; padding: 0.875rem 1rem; margin-bottom: 1rem; color: #2E7D32; font-size: 0.875rem;">
+            ✓ Network loaded: <strong>{len(G.nodes())} nodes</strong>
+        </div>
+        """, unsafe_allow_html=True)
 
         st.markdown("---")
         st.subheader("Layout")
@@ -505,8 +535,8 @@ if G is not None:
 
         import matplotlib.pyplot as plt
         fig, ax = plt.subplots(figsize=(6, 3))
-        ax.hist(degrees, bins=20, color='#333333',
-                edgecolor='black', alpha=0.7)
+        ax.hist(degrees, bins=20, color='#2196F3',
+                edgecolor='#1565C0', alpha=0.7)
         ax.set_xlabel('Degree (Number of Connections)')
         ax.set_ylabel('Frequency')
         ax.set_title('Network Degree Distribution')
@@ -645,21 +675,21 @@ if G is not None:
         st.markdown("""
             <div style="display: flex; align-items: center; gap: 0.5rem;">
                 <span style="display: inline-block; width: 12px; height: 12px; background: #AAAAAA; border-radius: 50%;"></span>
-                <span style="font-size: 0.875rem; color: #5A5A5A;">Normal Customers</span>
+                <span style="font-size: 0.875rem; color: #1565C0;">Normal Customers</span>
             </div>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="display: inline-block; width: 12px; height: 12px; background: #5A5A5A; border-radius: 50%;"></span>
-                <span style="font-size: 0.875rem; color: #0B0B0B;">Fraud Customers</span>
+                <span style="display: inline-block; width: 12px; height: 12px; background: #1565C0; border-radius: 50%;"></span>
+                <span style="font-size: 0.875rem; color: #1565C0;">Fraud Customers</span>
             </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown("""
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="display: inline-block; width: 12px; height: 12px; background: #333333;"></span>
-                <span style="font-size: 0.875rem; color: #5A5A5A;">Products</span>
+                <span style="display: inline-block; width: 12px; height: 12px; background: #90CAF9;"></span>
+                <span style="font-size: 0.875rem; color: #1565C0;">Products</span>
             </div>
         """, unsafe_allow_html=True)
 

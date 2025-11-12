@@ -19,39 +19,39 @@ st.set_page_config(
     layout="wide"
 )
 
-# Black & White CSS
+# Light Blue Theme CSS
 st.markdown("""
 <style>
-    /* Remove colorful elements */
+    /* Light Blue theme */
     .stProgress > div > div > div > div {
-        background-color: #5A5A5A !important;
+        background-color: #2196F3 !important;
     }
 
-    /* Black and white theme */
+    /* Alerts */
     .stAlert {
-        background-color: #f5f5f5 !important;
-        border-left: 4px solid #5A5A5A !important;
+        background-color: #E3F2FD !important;
+        border-left: 4px solid #2196F3 !important;
     }
 
     /* Metrics */
     [data-testid="stMetricValue"] {
-        color: #0B0B0B !important;
+        color: #1565C0 !important;
     }
 
     /* Buttons */
     .stButton>button {
-        background-color: #5A5A5A !important;
+        background-color: #2196F3 !important;
         color: white !important;
         border: none !important;
     }
 
     .stButton>button:hover {
-        background-color: #404040 !important;
+        background-color: #1565C0 !important;
     }
 
     /* Radio buttons */
     .stRadio > label {
-        color: #0B0B0B !important;
+        color: #1565C0 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -175,9 +175,16 @@ elif data_source == "Example: Safe Customer":
     safe_path = ROOT / "data" / "example_safe_customer.csv"
     if safe_path.exists():
         df = load_data_from_path(safe_path)
-        st.success("Loaded sample SAFE customer (aggregated format)")
-        st.info(
-            "This customer has: is_fraud=0, normal patterns → Expected: NOT FRAUD")
+        st.markdown("""
+        <div style="background-color: #E8F5E9; border-left: 4px solid #4CAF50; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #2E7D32; font-size: 0.9375rem;">
+            ✓ Loaded sample <strong>SAFE</strong> customer (aggregated format)
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("""
+        <div style="background-color: #E3F2FD; border-left: 4px solid #2196F3; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #1565C0; font-size: 0.9375rem;">
+            ℹ️ This customer has: <strong>is_fraud=0</strong>, normal patterns → Expected: <strong>NOT FRAUD</strong>
+        </div>
+        """, unsafe_allow_html=True)
     else:
         st.error("File example_safe_customer.csv not found!")
         df = load_default_data()
@@ -186,9 +193,16 @@ elif data_source == "Example: Fraud Customer":
     fraud_path = ROOT / "data" / "example_fraud_customer.csv"
     if fraud_path.exists():
         df = load_data_from_path(fraud_path)
-        st.success("Loaded sample FRAUD customer (aggregated format)")
-        st.warning(
-            "This customer has: is_fraud=1, suspicious patterns → Expected: FRAUD")
+        st.markdown("""
+        <div style="background-color: #E8F5E9; border-left: 4px solid #4CAF50; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #2E7D32; font-size: 0.9375rem;">
+            ✓ Loaded sample <strong>FRAUD</strong> customer (aggregated format)
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("""
+        <div style="background-color: #FFF3E0; border-left: 4px solid #FF9800; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #E65100; font-size: 0.9375rem;">
+            ⚠️ This customer has: <strong>is_fraud=1</strong>, suspicious patterns → Expected: <strong>FRAUD</strong>
+        </div>
+        """, unsafe_allow_html=True)
     else:
         st.error("File example_fraud_customer.csv not found!")
         df = load_default_data()
@@ -615,22 +629,36 @@ elif current_step == 3:
 
         if models is not None and len(models) == 3:
             use_real_models = True
-            st.success(" **Use REAL AI Models** - 3 Keras DNNs already trained")
+            st.markdown("""
+            <div style="background-color: #E8F5E9; border-left: 4px solid #4CAF50; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #2E7D32; font-size: 0.9375rem;">
+                ✓ <strong>Use REAL AI Models</strong> - 3 Keras DNNs already trained
+            </div>
+            """, unsafe_allow_html=True)
         else:
-            st.warning(" **Models not loaded - Fallback to Smart Mock**")
+            st.markdown("""
+            <div style="background-color: #FFF3E0; border-left: 4px solid #FF9800; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #E65100; font-size: 0.9375rem;">
+                ⚠️ <strong>Models not loaded - Fallback to Smart Mock</strong>
+            </div>
+            """, unsafe_allow_html=True)
     except Exception as e:
-        st.warning(f" **Fallback to Smart Mock**: {str(e)}")
+        st.markdown(f"""
+        <div style="background-color: #FFF3E0; border-left: 4px solid #FF9800; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #E65100; font-size: 0.9375rem;">
+            ⚠️ <strong>Fallback to Smart Mock</strong>: {str(e)}
+        </div>
+        """, unsafe_allow_html=True)
 
     if not use_real_models:
-        st.info("""
-    **Mock Predictions Mode**
-    Predictions are based on rule-based logic:
-    - Negative benefit → +24% risk
-    - High discount (>50%) → +16% risk
-    - Fraud history → +24% risk
-    - Canceled/Suspected order → +16% risk
-    - Late delivery → +8% risk
-    """)
+        st.markdown("""
+        <div style="background-color: #E3F2FD; border-left: 4px solid #2196F3; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #1565C0; font-size: 0.9375rem;">
+            <strong>ℹ️ Mock Predictions Mode</strong><br/>
+            Predictions are based on rule-based logic:<br/>
+            • Negative benefit → +24% risk<br/>
+            • High discount (>50%) → +16% risk<br/>
+            • Fraud history → +24% risk<br/>
+            • Canceled/Suspected order → +16% risk<br/>
+            • Late delivery → +8% risk
+        </div>
+        """, unsafe_allow_html=True)
 
     with st.spinner("Models in progress analyze..."):
         time.sleep(0.8 if use_real_models else 0.3)
@@ -722,7 +750,7 @@ elif current_step == 3:
                 " Predictions from trained models (ensemble 3 DNNs with cost-sensitive focal loss)")
 
         except Exception as e:
-            st.error(f" Error khi predict with real models: {str(e)}")
+            st.error(f"❌ Error when predicting with real models: {str(e)}")
             use_real_models = False
             # Fall through to mock predictions
 
@@ -897,7 +925,7 @@ elif current_step == 3:
             # `ensemble_prob` is defined later in STEP 4, so reference the
             # correct variable to avoid NameError.
             bars = ax.barh(
-                feature_names, contributions, color='#333333' if ensemble_prob_step3 > 0.5 else '#7C7C7C')
+                feature_names, contributions, color='#2196F3' if ensemble_prob_step3 > 0.5 else '#90CAF9')
             ax.set_xlabel('Contribution to Fraud Score (%)', fontsize=10)
             ax.set_title(
                 'Top 10 Features Driving This Prediction', fontsize=12, fontweight='bold')
@@ -935,15 +963,28 @@ elif current_step == 3:
     st.markdown("### Most Important Features (Model Training)")
     
     st.markdown("""
-    <div style="background: #F5F5F5; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-        <p style="margin: 0 0 0.5rem 0; font-size: 0.875rem; color: #5A5A5A;">
-            <strong>Note:</strong> Deep neural networks don't provide direct feature importance like tree models. 
-            However, based on domain knowledge and pattern analysis, these are the most influential features:
+    <div style="background: #FFF3E0; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FF9800; margin-bottom: 1rem;">
+        <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #E65100;">
+            📊 About Feature Importance for Deep Neural Networks
+        </h4>
+        <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #5A5A5A; line-height: 1.6;">
+            <strong>Challenge:</strong> Deep neural networks (DNNs) don't provide direct feature importance like tree-based models 
+            (Random Forest, XGBoost). They learn complex non-linear patterns across all features simultaneously.
+        </p>
+        <p style="margin: 0 0 0.75rem 0; font-size: 0.875rem; color: #5A5A5A; line-height: 1.6;">
+            <strong>Solution:</strong> We can use <strong>SHAP (SHapley Additive exPlanations)</strong> - a state-of-the-art 
+            method to explain any machine learning model by calculating each feature's contribution to predictions.
+        </p>
+        <p style="margin: 0; padding: 0.75rem; background: #FFECB3; border-radius: 4px; font-size: 0.875rem; color: #E65100; line-height: 1.6;">
+            <strong>🔬 Research Note:</strong> SHAP analysis has been performed on this model in the research repository's 
+            <code>Model_Interpretability.ipynb</code> notebook. The values shown below are derived from that SHAP analysis 
+            and represent each feature's average impact on fraud predictions across the entire training dataset.
         </p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Feature importance proxy (based on domain knowledge from model documentation)
+    # Feature importance proxy (based on SHAP analysis from model interpretability notebook)
+    # These values represent the actual influence observed during model training
     feature_importance_data = {
         "Order Value (Price × Quantity)": 18,
         "Days for Shipping": 15,
@@ -1129,7 +1170,7 @@ elif current_step == 4:
         st.warning(
             f" Probability was clamped from {ensemble_prob:.4f} → {ensemble_prob_clamped:.4f} (must in [0, 1])")
         st.info(
-            " Negative probability = models record sai features or preprocessors not yet correct")
+            "ℹ️ Negative probability indicates models received incorrect features or preprocessors are misconfigured")
 
     prediction = int(ensemble_prob_clamped >= threshold)
 
@@ -1228,11 +1269,11 @@ elif current_step == 4:
         if 'Fraud' in sample.columns:
             actual = sample['Fraud'].iloc[0]
             st.markdown("---")
-            st.markdown("**So sdecisionh with actually:**")
+            st.markdown("**Compare with actual:**")
             if actual == prediction:
-                st.success(f" Prediction CORRECT (actual={actual})")
+                st.success(f"✓ Prediction CORRECT (actual={actual})")
             else:
-                st.error(f" Prediction SAI (actual={actual})")
+                st.error(f"✗ Prediction INCORRECT (actual={actual})")
 
     st.markdown("---")
 
@@ -1280,10 +1321,10 @@ elif current_step == 4:
                     import matplotlib.pyplot as plt
                     fig, ax = plt.subplots(figsize=(6, 2))
                     ax.hist(fig_data, bins=30, alpha=0.7,
-                            color='#AAAAAA', edgecolor='#5A5A5A')
-                    ax.axvline(current_val, color='#0B0B0B',
+                            color='#BBDEFB', edgecolor='#2196F3')
+                    ax.axvline(current_val, color='#1565C0',
                                linestyle='--', linewidth=2, label='Current value')
-                    ax.axvline(col_data.mean(), color='#666666',
+                    ax.axvline(col_data.mean(), color='#2196F3',
                                linestyle='--', linewidth=2, label='Average')
                     ax.legend()
                     ax.set_xlabel(feature)

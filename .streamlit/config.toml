@@ -1,9 +1,9 @@
 [theme]
-# Monochrome Design System
-primaryColor = "#0B0B0B"
-backgroundColor = "#F5F5F5"
+# Light Blue Design System
+primaryColor = "#2196F3"
+backgroundColor = "#E3F2FD"
 secondaryBackgroundColor = "#FFFFFF"
-textColor = "#0B0B0B"
+textColor = "#1565C0"
 font = "sans serif"
 
 [server]

@@ -1,0 +1,38 @@
+{
+  "metrics": {
+    "accuracy": 0.9053,
+    "precision": 0.5,
+    "recall": 0.7483,
+    "f1_score": 0.5117,
+    "roc_auc": 0.8216
+  },
+  "confusion_matrix": {
+    "true_negative": 17062,
+    "false_positive": 848,
+    "false_negative": 72,
+    "true_positive": 214
+  },
+  "dataset": {
+    "total_samples": 18196,
+    "legitimate_samples": 17910,
+    "fraud_samples": 286,
+    "imbalance_ratio": "98.43% legitimate, 1.57% fraud"
+  },
+  "features": {
+    "total": 61,
+    "transaction_based": 57,
+    "network_based": 4,
+    "pca_components": 45,
+    "variance_retained": 0.9512
+  },
+  "model_info": {
+    "type": "Deep Neural Network Ensemble",
+    "num_models": 3,
+    "seeds": [42, 123, 456],
+    "architecture": "45 → 256 → 128 → 64 → 1",
+    "loss_function": "Cost-Sensitive Focal Loss",
+    "fn_cost": 15.0,
+    "threshold": 0.2,
+    "preprocessing": ["StandardScaler", "SMOTE", "PCA"]
+  }
+}

@@ -51,8 +51,19 @@ margin: 0.5rem 0;
 }
 .monochrome-bar-fill {
 height: 100%;
-background-color: #0B0B0B;
+background-color: #2196F3;
 transition: width 0.3s ease;
+}
+
+/* Hide expander arrow icon text */
+.streamlit-expander .st-emotion-cache-1gulkj5 {
+    display: none;
+}
+details summary p {
+    display: inline;
+}
+details summary::before {
+    content: "" !important;
 }
 
 /* Tab styling - Enhanced monochrome design */
@@ -64,7 +75,7 @@ border-bottom: 2px solid #EDEDED;
 border-radius: 12px 12px 0 0;
 }
 .stTabs [data-baseweb="tab"] {
-color: #5A5A5A;
+color: #1565C0;
 font-size: 1rem;
 font-weight: 500;
 padding: 0.75rem 1.5rem;
@@ -75,16 +86,16 @@ transition: all 0.2s ease;
 }
 .stTabs [data-baseweb="tab"]:hover {
 background-color: white;
-color: #0B0B0B;
-border: 1px solid #E0E0E0;
+color: #1565C0;
+border: 1px solid #BBDEFB;
 transform: translateY(-1px);
 box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 .stTabs [aria-selected="true"] {
 color: #FFFFFF !important;
 font-weight: 700;
-background-color: #5A5A5A;
-border: 1px solid #5A5A5A;
+background-color: #1565C0;
+border: 1px solid #1565C0;
 box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 .stTabs [aria-selected="true"]:hover {
@@ -99,10 +110,10 @@ color: #FFFFFF !important;
 
 /* Form inputs */
 .stTextInput input, .stNumberInput input, .stSelectbox select {
-background-color: rgba(245, 245, 245, 0.5);
-border: 1px solid #EDEDED;
+background-color: white;
+border: 1px solid #BBDEFB;
 border-radius: 8px;
-color: #0B0B0B;
+color: #1565C0;
 }
 
 /* Buttons - Enhanced visibility */
@@ -110,29 +121,29 @@ color: #0B0B0B;
 border-radius: 8px;
 font-weight: 700;
 font-size: 1rem;
-border: 2px solid #0B0B0B;
+border: 2px solid #2196F3;
 transition: all 0.2s ease;
 }
 .stButton button[kind="primary"],
 .stButton > button[type="submit"]:not([kind="secondary"]) {
-background-color: #0B0B0B !important;
+background-color: #2196F3 !important;
 color: #FFFFFF !important;
-border: 2px solid #0B0B0B !important;
+border: 2px solid #2196F3 !important;
 }
 .stButton button[kind="primary"]:hover,
 .stButton > button[type="submit"]:not([kind="secondary"]):hover {
-background-color: #1A1A1A !important;
+background-color: #1976D2 !important;
 color: #FFFFFF !important;
 transform: translateY(-1px);
 box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 .stButton button[kind="secondary"] {
 background-color: white !important;
-color: #0B0B0B !important;
-border: 2px solid #0B0B0B !important;
+color: #2196F3 !important;
+border: 2px solid #BBDEFB !important;
 }
 .stButton button[kind="secondary"]:hover {
-background-color: #F5F5F5 !important;
+background-color: #E3F2FD !important;
 transform: translateY(-1px);
 box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
@@ -147,16 +158,41 @@ color: #FFFFFF !important;
 div[data-testid="stFormSubmitButton"] button p {
 color: #FFFFFF !important;
 }
+
+/* Force ALL primary button text to be white - including "Predict All" */
+.stButton > button[kind="primary"],
+.stButton > button[kind="primary"]:hover,
+.stButton > button[kind="primary"]:active,
+.stButton > button[kind="primary"]:focus,
+.stButton button[data-baseweb="button"][kind="primary"],
+button[kind="primary"] {
+    color: #FFFFFF !important;
+    background-color: #2196F3 !important;
+}
+
+.stButton > button[kind="primary"]:hover {
+    background-color: #1976D2 !important;
+}
+
+/* Force white color for all text inside primary buttons */
+.stButton > button[kind="primary"] p,
+.stButton > button[kind="primary"] span,
+.stButton > button[kind="primary"] div,
+button[kind="primary"] p,
+button[kind="primary"] span,
+button[kind="primary"] div {
+    color: #FFFFFF !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
 # Header
 st.markdown("""
 <header style="margin-bottom: 2rem;">
-<h1 style="font-size: 2.5rem; font-weight: 800; color: #0B0B0B; letter-spacing: -0.02em; margin-bottom: 0.5rem;">
+<h1 style="font-size: 2.5rem; font-weight: 800; color: #1565C0; letter-spacing: -0.02em; margin-bottom: 0.5rem;">
 Fraud Prediction
 </h1>
-<h4 style="font-size: 1.125rem; font-weight: 600; color: #5A5A5A; margin: 0;">
+<h4 style="font-size: 1.125rem; font-weight: 600; color: #1565C0; margin: 0;">
 Input and analysis tools for fraud detection models.
 </h4>
 </header>
@@ -174,15 +210,15 @@ with st.spinner("Loading models and preprocessors..."):
 
 if models is None:
     st.markdown("""
-    <div style="background: #F5F5F5; padding: 1rem; border-radius: 8px; border-left: 4px solid #0B0B0B;">
+    <div style="background: #E3F2FD; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196F3;">
     <strong>Error:</strong> Cannot load models! Please check the models/ directory.
     </div>
     """, unsafe_allow_html=True)
     st.stop()
 
 st.markdown("""
-<div style="background: white; padding: 0.75rem; border-radius: 8px; border: 1px solid #EDEDED; margin-bottom: 1.5rem;">
-<span style="color: #0B0B0B; font-weight: 600;">Models and preprocessors are ready</span>
+<div style="background: white; padding: 0.75rem; border-radius: 8px; border: 1px solid #BBDEFB; margin-bottom: 1.5rem;">
+<span style="color: #1976D2; font-weight: 600;">Models and preprocessors are ready</span>
 </div>
 """, unsafe_allow_html=True)
 
@@ -192,132 +228,160 @@ tab1, tab2 = st.tabs(["Single Prediction", "Batch (CSV/XLSX)"])
 # ==================== TAB 1: Single Prediction ====================
 with tab1:
     st.markdown("""
-<h2 style="font-size: 1.875rem; font-weight: 800; color: #0B0B0B; margin-bottom: 0.5rem;">
-Single Transaction Prediction
+<h2 style="font-size: 1.875rem; font-weight: 800; color: #1565C0; margin-bottom: 0.5rem;">
+Single Customer Prediction
 </h2>
-<p style="font-size: 0.875rem; color: #5A5A5A; margin-bottom: 1rem;">
-Enter 10 transaction fields. Network features use estimated values for demo.
+<p style="font-size: 0.875rem; color: #1565C0; margin-bottom: 1rem;">
+Enter Customer ID to load aggregated features from training data and predict fraud probability.
 </p>
 """, unsafe_allow_html=True)
 
-    # Warning about model limitation
+    # Info about model requirement
     st.markdown("""
-<div style="background: #FFF9E6; padding: 1rem; border-radius: 8px; border-left: 4px solid #F59E0B; margin-bottom: 1.5rem;">
-<sin style="color: #92400E;"> Important Note:</sin>
-<p style="color: #78350F; margin: 0.5rem 0 0 0; font-size: 0.875rem;">
-AI models trained on <sin>aggregated per-customer data</sin> (mean, sum, std, min, max from multiple transactions).
-This form only inputs <sin>1 transaction</sin> so will <sin>mock aggregate values</sin> → predictions may not be accurate.<br><br>
-<sin>Recommendation:</sin> Use <sin>Tab "Batch (CSV/XLSX)"</sin> to upload aggregated customer data file for more accurate results.
+<div style="background: #E3F2FD; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196F3; margin-bottom: 1.5rem;">
+<span style="color: #1565C0; font-weight: 600;">Accurate Prediction Method</span>
+<p style="color: #1976D2; margin: 0.5rem 0 0 0; font-size: 0.875rem;">
+The model uses <strong>61 aggregated features per customer</strong> (mean, sum, std, min, max from multiple transactions).<br>
+Enter a Customer ID to load their real aggregated data from <code>combined_features.csv</code> for accurate predictions.
 </p>
 </div>
 """, unsafe_allow_html=True)
 
-    with st.form("single_prediction_form"):
-            col1, col2 = st.columns(2)
+    # Load combined_features.csv
+    @st.cache_data
+    def load_combined_features():
+        from pathlib import Path
+        combined_path = Path(__file__).parent.parent.parent / "fraud_supplychain_year4" / "Fraud_SupplyChain" / "data" / "combined_features.csv"
+        if combined_path.exists():
+            df = pd.read_csv(combined_path)
+            # Rename is_fraud to Fraud for consistency
+            if 'is_fraud' in df.columns:
+                df = df.rename(columns={'is_fraud': 'Fraud'})
+            return df
+        return None
+    
+    combined_df = load_combined_features()
+    
+    if combined_df is None:
+        st.error("""
+        **Error:** Cannot load combined_features.csv!
+        
+        This file contains aggregated customer data required for accurate predictions.
+        Please ensure the file exists at: `fraud_supplychain_year4/Fraud_SupplyChain/data/combined_features.csv`
+        """)
+        st.info("**Alternative:** Use the 'Batch (CSV/XLSX)' tab to upload your own aggregated features file.")
+    else:
+        # Show available customer IDs
+        if 'Customer Id' in combined_df.columns:
+            available_customers = combined_df['Customer Id'].unique()
             
-            # LEFT COLUMN - Order & Shipping Information
+            # Use styled HTML instead of st.info to avoid black text
+            st.markdown(f"""
+            <div style="background-color: #E3F2FD; border-left: 4px solid #2196F3; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #1565C0; font-size: 0.9375rem;">
+                ✓ Loaded <strong>{len(combined_df)}</strong> customers with <strong>61</strong> aggregated features
+            </div>
+            """, unsafe_allow_html=True)
+            
+            with st.expander("View sample Customer IDs", expanded=False):
+                st.markdown(f"""
+                <p style="color: #1565C0; font-size: 0.9375rem; margin-bottom: 0.5rem;">
+                    Total unique customers: <strong>{len(available_customers):,}</strong>
+                </p>
+                """, unsafe_allow_html=True)
+                st.write("**Sample IDs:**", available_customers[:20].tolist())
+        else:
+            available_customers = combined_df.index.unique()
+            st.warning("No 'Customer Id' column found. Using row index.")
+        
+        with st.form("single_prediction_form"):
+            st.markdown("""
+            <h3 style="font-size: 1.125rem; font-weight: 600; color: #1565C0; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #EDEDED;">
+            Enter Customer ID
+            </h3>
+            """, unsafe_allow_html=True)
+            
+            col1, col2 = st.columns([2, 1])
+            
             with col1:
-                # Group 1: Order Information
-                st.markdown("""
-        <h3 style="font-size: 1.125rem; font-weight: 600; color: #111; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #EDEDED;">
-        1. Order Information
-        </h3>
-        """, unsafe_allow_html=True)
-                
-                order_value = st.number_input("Order Value (USD)", min_value=0.0, value=250.0, step=0.01,
-                                             help="Larger orders may indicate higher risk")
-                product_quantity = st.number_input("Product Quantity", min_value=1, max_value=100, value=1)
-                discount_rate = st.slider("Discount (%)", min_value=0, max_value=50, value=10,
-                                         help="Discounts > 20% carry higher risk")
-                
-                # Group 2: Shipping Information
-                st.markdown("""
-        <h3 style="font-size: 1.125rem; font-weight: 600; color: #111; margin-top: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #EDEDED;">
-        2. Shipping Information
-        </h3>
-        """, unsafe_allow_html=True)
-                
-                shipping_days = st.number_input("Shipping Days", min_value=0, max_value=30, value=3,
-                                               help="Very fast shipping (<2 days) may be suspicious")
-                shipping_method = st.selectbox("Shipping Method",
-                                              ["Standard Class", "Second Class", "First Class", "Same Day"])
-                late_delivery_risk = st.radio("Late Delivery Risk", ["No", "Yes"], horizontal=True)
+                if 'Customer Id' in combined_df.columns:
+                    customer_id = st.number_input(
+                        "Customer ID",
+                        min_value=int(available_customers.min()),
+                        max_value=int(available_customers.max()),
+                        value=int(available_customers[0]),
+                        step=1,
+                        help="Enter a Customer ID from the training dataset"
+                    )
+                else:
+                    customer_id = st.number_input(
+                        "Row Index",
+                        min_value=0,
+                        max_value=len(combined_df)-1,
+                        value=0,
+                        step=1,
+                        help="Enter row index (0 to {})".format(len(combined_df)-1)
+                    )
             
-            # RIGHT COLUMN - Customer Information
             with col2:
-                st.markdown("""
-        <h3 style="font-size: 1.125rem; font-weight: 600; color: #111; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #EDEDED;">
-        3. Customer Information
-        </h3>
-        """, unsafe_allow_html=True)
-                
-                customer_segment = st.selectbox("Customer Segment",
-                                               ["Consumer", "Corporate", "Home Office"])
-                product_category = st.selectbox("Product Category",
-                                               ["Fishing", "Electronics", "Camping & Hiking", "Cleats", "Office Supplies"])
-                market_region = st.selectbox("Market Region",
-                                            ["Pacific Asia", "Europe", "USCA", "LATAM"])
-                
-                st.markdown("""
-        <p style="font-size: 0.75rem; color: #5A5A5A; font-style: italic; opacity: 0.7; margin-top: 1.5rem;">
-        Network features use estimated values for demo.
-        </p>
-        """, unsafe_allow_html=True)
+                st.markdown("<div style='margin-top: 1.8rem;'></div>", unsafe_allow_html=True)
+                random_btn = st.form_submit_button("Random Customer", use_container_width=True, type="secondary")
+            
+            st.markdown("<div style='margin: 1.5rem 0;'></div>", unsafe_allow_html=True)
             
             # Action Buttons
             col_reset, col_predict = st.columns([1, 1])
             with col_reset:
-                reset_btn = st.form_submit_button("Reset Form", use_container_width=True, type="secondary")
+                reset_btn = st.form_submit_button("Reset", use_container_width=True, type="secondary")
             with col_predict:
                 submitted = st.form_submit_button("Predict Fraud", use_container_width=True, type="primary")
             
+            if random_btn:
+                import numpy as np
+                customer_id = int(np.random.choice(available_customers))
+                st.rerun()
+            
             if submitted:
-                # Convert user inputs to model features
-                late_risk_val = 1 if late_delivery_risk == "Yes" else 0
-                discount_decimal = discount_rate / 100.0
+                # Find customer data
+                if 'Customer Id' in combined_df.columns:
+                    customer_data = combined_df[combined_df['Customer Id'] == customer_id]
+                else:
+                    customer_data = combined_df.iloc[[customer_id]]
                 
-                # Prepare transaction data (simplified - using key fields from form)
-                transaction_data = {
-                    'Days for shipping (real)': shipping_days,
-                    'Days for shipment (scheduled)': shipping_days,
-                    'Benefit per order': order_value * 0.35,  # Estimated
-                    'Sales per customer': order_value,
-                    'Late_delivery_risk': late_risk_val,
-                    'Order Item Discount': order_value * discount_decimal,
-                    'Order Item Discount Rate': discount_decimal,
-                    'Order Item Product Price': order_value / product_quantity,
-                    'Order Item Profit Ratio': 0.35,
-                    'Order Item Quantity': product_quantity,
-                    'Sales': order_value,
-                    'Order Item Total': order_value,
-                    'Order Profit Per Order': order_value * 0.35,
-                    'product_popularity': 5000,
-                    'product_profit_margin': 0.35,
-                    'product_avg_discount': discount_decimal,
-                    'customer_order_count': 3,
-                    'customer_total_spent': order_value * 3,
-                    'customer_avg_order_value': order_value,
-                    'customer_fraud_history': 0,
-                    'recency_days': 30,
-                    'order_count_last_30d': 1,
-                    'total_spent_last_30d': order_value,
-                    'time_since_last_order': 30,
-                    'is_new_customer': 0,
-                    'rush_order': 0,
-                    'unusual_quantity': 1 if product_quantity > 5 else 0,
-                    'high_discount_flag': 1 if discount_decimal > 0.2 else 0,
-                    'negative_benefit': 0,
-                    'international_order': 0,
-                    'high_value_order': 1 if order_value > 500 else 0,
-                    'high_risk_combination': late_risk_val,
-                    'degree_centrality': 0.0045,
-                    'betweenness_centrality': 0.00012,
-                    'closeness_centrality': 0.38,
-                    'pagerank': 0.000048,
-                }
-
+                if len(customer_data) == 0:
+                    st.error(f"Customer ID {customer_id} not found in dataset!")
+                    st.stop()
+                
+                # Get customer features (exclude Customer Id and Fraud columns)
+                feature_cols = [col for col in customer_data.columns if col not in ['Customer Id', 'Fraud', 'is_fraud']]
+                customer_features = customer_data[feature_cols]
+                
+                # Show customer info
+                st.markdown('<div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #EDEDED;"</div>', unsafe_allow_html=True)
+                
+                st.markdown("""
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1976D2; margin-bottom: 1rem;">
+                Customer Information
+                </h3>
+                """, unsafe_allow_html=True)
+                
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Customer ID", customer_id)
+                with col2:
+                    st.metric("Features", len(feature_cols))
+                with col3:
+                    if 'Fraud' in customer_data.columns:
+                        actual_fraud = customer_data['Fraud'].iloc[0]
+                        st.metric("Actual Label", "FRAUD" if actual_fraud == 1 else "SAFE")
+                    else:
+                        st.metric("Actual Label", "Unknown")
+                
+                # Show preview of features
+                with st.expander("View Customer Features (61 aggregated features)"):
+                    st.dataframe(customer_features.T, use_container_width=True)
+                
                 # Prepare for prediction
-                df = prepare_single_transaction(transaction_data)
+                df = prepare_single_transaction(customer_features.iloc[0].to_dict())
 
                 # Predict
                 with st.spinner("Predicting..."):
@@ -327,7 +391,7 @@ This form only inputs <sin>1 transaction</sin> so will <sin>mock aggregate value
                     st.markdown('<div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #EDEDED;"></div>', unsafe_allow_html=True)
 
                     st.markdown("""
-                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #0B0B0B; margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #1976D2; margin-bottom: 1.5rem;">
                     Prediction Result
                     </h3>
                     """, unsafe_allow_html=True)
@@ -344,8 +408,8 @@ This form only inputs <sin>1 transaction</sin> so will <sin>mock aggregate value
                     if is_fraud:
                         # FRAUD DETECTED
                         result_card = f"""
-<div style="padding: 1.5rem; background: #F5F5F5; border-left: 4px solid #0B0B0B; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-<h4 style="font-size: 1.25rem; font-weight: 800; color: #0B0B0B; margin-bottom: 1rem;">
+<div style="padding: 1.5rem; background: #E3F2FD; border-left: 4px solid #2196F3; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+<h4 style="font-size: 1.25rem; font-weight: 800; color: #1565C0; margin-bottom: 1rem;">
 FRAUD DETECTED
 </h4>
 
@@ -353,7 +417,7 @@ FRAUD DETECTED
 <div style="margin-bottom: 1rem;">
 <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">
 <span>Fraud Probability</span>
-<span style="color: #0B0B0B; font-weight: 800;">{ensemble_score*100:.1f}%</span>
+<span style="color: #1565C0; font-weight: 800;">{ensemble_score*100:.1f}%</span>
 </div>
 <div class="monochrome-bar">
 <div class="monochrome-bar-fill" style="width: {ensemble_score*100:.1f}%;"></div>
@@ -361,31 +425,31 @@ FRAUD DETECTED
 </div>
 
 <!-- Risk Badge -->
-<span style="display: inline-block; padding: 0.25rem 0.75rem; background: #0B0B0B; color: white; font-size: 0.75rem; font-weight: 700; border-radius: 9999px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 1rem;">
+<span style="display: inline-block; padding: 0.25rem 0.75rem; background: #2196F3; color: white; font-size: 0.75rem; font-weight: 700; border-radius: 9999px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 1rem;">
 High Risk
 </span>
 
 <!-- Recommendations -->
 <div style="margin-top: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #EDEDED;">
-<ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem; color: #0B0B0B;">
+<ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem; color: #1565C0;">
 <li style="display: flex; align-items: flex-start; margin-bottom: 0.25rem;">
-<span style="width: 8px; height: 8px; border-radius: 9999px; background: #0B0B0B; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #2196F3; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
 Temporarily Block Transaction
 </li>
 <li style="display: flex; align-items: flex-start; margin-bottom: 0.25rem;">
-<span style="width: 8px; height: 8px; border-radius: 9999px; background: #0B0B0B; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #2196F3; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
 Manual Investigation Required
 </li>
 <li style="display: flex; align-items: flex-start;">
-<span style="width: 8px; height: 8px; border-radius: 9999px; background: #0B0B0B; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #2196F3; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
 Contact Customer for Verification
 </li>
 </ul>
 </div>
 
 <!-- Prediction Details -->
-<div style="margin-top: 1rem; padding: 1rem; border: 1px solid #EDEDED; border-radius: 8px; background: white;">
-<h5 style="font-size: 0.875rem; font-weight: 600; color: #5A5A5A; margin-bottom: 0.75rem;">
+<div style="margin-top: 1rem; padding: 1rem; border: 1px solid #BBDEFB; border-radius: 8px; background: white;">
+<h5 style="font-size: 0.875rem; font-weight: 600; color: #1565C0; margin-bottom: 0.75rem;">
 Prediction Details (3 models + ensemble)
 </h5>
 
@@ -412,8 +476,8 @@ Prediction Details (3 models + ensemble)
 </div>
 </div>
 <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.5rem; border-top: 1px solid rgba(237,237,237,0.5);">
-<span style="flex: 1; font-weight: 800; color: #0B0B0B;">Ensemble (average):</span>
-<span style="font-weight: 800; color: #0B0B0B; margin: 0 1rem;">{ensemble_score*100:.1f}%</span>
+<span style="flex: 1; font-weight: 800; color: #1565C0;">Ensemble (average):</span>
+<span style="font-weight: 800; color: #1565C0; margin: 0 1rem;">{ensemble_score*100:.1f}%</span>
 <div class="monochrome-bar" style="flex: 1;">
 <div class="monochrome-bar-fill" style="width: {ensemble_score*100:.1f}%;"></div>
 </div>
@@ -421,7 +485,7 @@ Prediction Details (3 models + ensemble)
 </div>
 </div>
 
-<p style="font-size: 0.75rem; color: #5A5A5A; margin-top: 1rem; opacity: 0.8;">
+<p style="font-size: 0.75rem; color: #1565C0; margin-top: 1rem; opacity: 0.8;">
 Threshold = {MODEL_THRESHOLD:.2f}. Probability > {MODEL_THRESHOLD*100:.0f}% → labeled as FRAUD.
 </p>
 </div>
@@ -429,8 +493,8 @@ Threshold = {MODEL_THRESHOLD:.2f}. Probability > {MODEL_THRESHOLD*100:.0f}% → 
                 else:
                     # NOT FRAUD
                     result_card = f"""
-<div style="padding: 1.5rem; background: #F5F5F5; border-left: 4px solid #EDEDED; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-<h4 style="font-size: 1.25rem; font-weight: 800; color: #0B0B0B; margin-bottom: 1rem;">
+<div style="padding: 1.5rem; background: #E3F2FD; border-left: 4px solid #EDEDED; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+<h4 style="font-size: 1.25rem; font-weight: 800; color: #1565C0; margin-bottom: 1rem;">
 NO FRAUD DETECTED
 </h4>
 
@@ -438,7 +502,7 @@ NO FRAUD DETECTED
 <div style="margin-bottom: 1rem;">
 <div style="display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">
 <span>Fraud Probability</span>
-<span style="color: #0B0B0B; font-weight: 800;">{ensemble_score*100:.1f}%</span>
+<span style="color: #1565C0; font-weight: 800;">{ensemble_score*100:.1f}%</span>
 </div>
 <div class="monochrome-bar">
 <div class="monochrome-bar-fill" style="width: {ensemble_score*100:.1f}%;"></div>
@@ -446,19 +510,19 @@ NO FRAUD DETECTED
 </div>
 
 <!-- Risk Badge -->
-<span style="display: inline-block; padding: 0.25rem 0.75rem; border: 1px solid #0B0B0B; color: #0B0B0B; font-size: 0.75rem; font-weight: 700; border-radius: 9999px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 1rem;">
+<span style="display: inline-block; padding: 0.25rem 0.75rem; border: 1px solid #2196F3; color: #1565C0; font-size: 0.75rem; font-weight: 700; border-radius: 9999px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 1rem;">
 Low Risk
 </span>
 
 <!-- Recommendations -->
 <div style="margin-top: 1rem;">
-<ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem; color: #0B0B0B;">
+<ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem; color: #1565C0;">
 <li style="display: flex; align-items: flex-start; margin-bottom: 0.25rem;">
-<span style="width: 8px; height: 8px; border-radius: 9999px; background: #EDEDED; border: 1px solid #0B0B0B; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #EDEDED; border: 1px solid #2196F3; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
 Allow Transaction
 </li>
 <li style="display: flex; align-items: flex-start;">
-<span style="width: 8px; height: 8px; border-radius: 9999px; background: #EDEDED; border: 1px solid #0B0B0B; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #EDEDED; border: 1px solid #2196F3; margin-right: 0.75rem; margin-top: 0.25rem; flex-shrink: 0;"></span>
 Proceed as Normal
 </li>
 </ul>
@@ -471,19 +535,19 @@ Proceed as Normal
 # ==================== TAB 2: Batch Prediction ====================
 with tab2:
     st.markdown("""
-<h2 style="font-size: 1.875rem; font-weight: 800; color: #0B0B0B; margin-bottom: 0.5rem;">
+<h2 style="font-size: 1.875rem; font-weight: 800; color: #1565C0; margin-bottom: 0.5rem;">
 Batch Prediction
 </h2>
-<p style="font-size: 0.875rem; color: #5A5A5A; margin-bottom: 1rem;">
+<p style="font-size: 0.875rem; color: #1565C0; margin-bottom: 1rem;">
 Upload CSV with aggregated customer features (61 columns). Models expect per-customer statistics.
 </p>
 """, unsafe_allow_html=True)
 
     # Info box about expected format
     st.markdown("""
-<div style="background: #FFFFFF; padding: 1rem; border-radius: 8px; border-left: 4px solid #5A5A5A; border: 1px solid #EDEDED; margin-bottom: 1.5rem;">
-<strong style="color: #0B0B0B;"> Expected Format: Aggregated Customer Data</strong>
-<p style="color: #5A5A5A; margin: 0.5rem 0 0 0; font-size: 0.875rem;">
+<div style="background: #FFFFFF; padding: 1rem; border-radius: 8px; border-left: 4px solid #1565C0; border: 1px solid #BBDEFB; margin-bottom: 1.5rem;">
+<strong style="color: #1565C0;"> Expected Format: Aggregated Customer Data</strong>
+<p style="color: #1565C0; margin: 0.5rem 0 0 0; font-size: 0.875rem;">
 Upload CSV with <strong>61 aggregated features</strong> (mean, sum, std, min, max for each metric).<br>
 Example files: <code>example_safe_customer.csv</code>, <code>example_fraud_customer.csv</code><br>
 <em>View <code>data/README_AGGREGATED_FORMAT.md</code> to understand format details</em>
@@ -548,7 +612,7 @@ Example files: <code>example_safe_customer.csv</code>, <code>example_fraud_custo
             st.markdown('<div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #EDEDED;"></div>', unsafe_allow_html=True)
             
             st.markdown("""
-    <h4 style="font-size: 1.125rem; font-weight: 600; color: #0B0B0B; margin-bottom: 1rem;">
+    <h4 style="font-size: 1.125rem; font-weight: 600; color: #1565C0; margin-bottom: 1rem;">
     Preview First 5 Rows
     </h4>
     """, unsafe_allow_html=True)
@@ -557,7 +621,7 @@ Example files: <code>example_safe_customer.csv</code>, <code>example_fraud_custo
             features_df, original_df = prepare_batch_transactions(uploaded_file)
             
             st.dataframe(original_df.head(5), use_container_width=True)
-            st.markdown(f"<p style='font-size: 0.75rem; color: #5A5A5A; margin-top: 0.75rem;'>Total rows: {len(original_df)}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='font-size: 0.75rem; color: #1565C0; margin-top: 0.75rem;'>Total rows: {len(original_df)}</p>", unsafe_allow_html=True)
             
             st.markdown('<div style="margin: 1.5rem 0; padding-top: 1.5rem; border-top: 1px solid #EDEDED;"></div>', unsafe_allow_html=True)
             
@@ -580,7 +644,7 @@ Example files: <code>example_safe_customer.csv</code>, <code>example_fraud_custo
                     st.markdown('<div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #EDEDED;"></div>', unsafe_allow_html=True)
 
                     st.markdown("""
-                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #0B0B0B; margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #1976D2; margin-bottom: 1.5rem;">
                         Batch Prediction Results
                     </h3>
                     """, unsafe_allow_html=True)
@@ -594,25 +658,25 @@ Example files: <code>example_safe_customer.csv</code>, <code>example_fraud_custo
 
                     with col1:
                         st.markdown(f"""
-                        <div style="padding: 1rem; background: #F5F5F5; border-radius: 8px; border: 1px solid #EDEDED;">
-                            <span style="font-size: 0.875rem; color: #5A5A5A;">Total Transactions Predicted:</span>
-                            <p style="font-size: 1.5rem; font-weight: 800; color: #0B0B0B; margin: 0.25rem 0 0 0;">{total}</p>
+                        <div style="padding: 1rem; background: #E3F2FD; border-radius: 8px; border: 1px solid #BBDEFB;">
+                            <span style="font-size: 0.875rem; color: #1565C0;">Total Transactions Predicted:</span>
+                            <p style="font-size: 1.5rem; font-weight: 800; color: #1565C0; margin: 0.25rem 0 0 0;">{total}</p>
                         </div>
                         """, unsafe_allow_html=True)
 
                     with col2:
                         st.markdown(f"""
-                        <div style="padding: 1rem; background: #F5F5F5; border-radius: 8px; border: 1px solid #EDEDED;">
-                            <span style="font-size: 0.875rem; color: #5A5A5A;">Fraud Detected:</span>
-                            <p style="font-size: 1.5rem; font-weight: 800; color: #0B0B0B; margin: 0.25rem 0 0 0;">{fraud_count} ({fraud_count/total*100:.0f}%)</p>
+                        <div style="padding: 1rem; background: #E3F2FD; border-radius: 8px; border: 1px solid #BBDEFB;">
+                            <span style="font-size: 0.875rem; color: #1565C0;">Fraud Detected:</span>
+                            <p style="font-size: 1.5rem; font-weight: 800; color: #1565C0; margin: 0.25rem 0 0 0;">{fraud_count} ({fraud_count/total*100:.0f}%)</p>
                         </div>
                         """, unsafe_allow_html=True)
 
                     with col3:
                         st.markdown(f"""
-                        <div style="padding: 1rem; background: #F5F5F5; border-radius: 8px; border: 1px solid #EDEDED;">
-                            <span style="font-size: 0.875rem; color: #5A5A5A;">Not Fraud:</span>
-                            <p style="font-size: 1.5rem; font-weight: 800; color: #0B0B0B; margin: 0.25rem 0 0 0;">{not_fraud_count} ({not_fraud_count/total*100:.0f}%)</p>
+                        <div style="padding: 1rem; background: #E3F2FD; border-radius: 8px; border: 1px solid #BBDEFB;">
+                            <span style="font-size: 0.875rem; color: #1565C0;">Not Fraud:</span>
+                            <p style="font-size: 1.5rem; font-weight: 800; color: #1565C0; margin: 0.25rem 0 0 0;">{not_fraud_count} ({not_fraud_count/total*100:.0f}%)</p>
                         </div>
                         """, unsafe_allow_html=True)
 
@@ -624,21 +688,21 @@ Example files: <code>example_safe_customer.csv</code>, <code>example_fraud_custo
                     high_risk = (result_df['risk_level'] == 'High').sum()
 
                     st.markdown(f"""
-                    <div style="padding: 1.5rem; background: white; border-radius: 12px; border: 1px solid #EDEDED; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                        <h4 style="font-size: 1.125rem; font-weight: 600; color: #0B0B0B; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #EDEDED;">
+                    <div style="padding: 1.5rem; background: white; border-radius: 12px; border: 1px solid #BBDEFB; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                        <h4 style="font-size: 1.125rem; font-weight: 600; color: #1565C0; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #EDEDED;">
                             Risk Distribution
                         </h4>
                         <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem;">
                             <li style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(237,237,237,0.5); margin-bottom: 0.75rem;">
-                                <span style="color: #0B0B0B; font-weight: 700;">High Risk (&gt;50%):</span>
+                                <span style="color: #1565C0; font-weight: 700;">High Risk (&gt;50%):</span>
                                 <span style="font-weight: 700; color: #111;">{high_risk}</span>
                             </li>
                             <li style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(237,237,237,0.5); margin-bottom: 0.75rem;">
-                                <span style="color: #0B0B0B; font-weight: 700;">Medium Risk (20%-50%):</span>
+                                <span style="color: #1565C0; font-weight: 700;">Medium Risk (20%-50%):</span>
                                 <span style="font-weight: 700; color: #111;">{medium_risk}</span>
                             </li>
                             <li style="display: flex; justify-content: space-between; align-items: center;">
-                                <span style="color: #0B0B0B; font-weight: 700;">Low Risk (&lt;20%):</span>
+                                <span style="color: #1565C0; font-weight: 700;">Low Risk (&lt;20%):</span>
                                 <span style="font-weight: 700; color: #111;">{low_risk}</span>
                             </li>
                         </ul>
@@ -649,7 +713,7 @@ Example files: <code>example_safe_customer.csv</code>, <code>example_fraud_custo
                     st.markdown('<div style="margin: 2rem 0;"></div>', unsafe_allow_html=True)
 
                     st.markdown("""
-                    <h4 style="font-size: 1.125rem; font-weight: 600; color: #0B0B0B; margin-bottom: 1rem;">
+                    <h4 style="font-size: 1.125rem; font-weight: 600; color: #1565C0; margin-bottom: 1rem;">
                         Detailed Results
                     </h4>
                     """, unsafe_allow_html=True)
@@ -682,10 +746,10 @@ Example files: <code>example_safe_customer.csv</code>, <code>example_fraud_custo
 
         except Exception as e:
             st.markdown(f"""
-            <div style="background: #F5F5F5; padding: 1rem; border-radius: 8px; border-left: 4px solid #0B0B0B;">
+            <div style="background: #E3F2FD; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196F3;">
                 <strong>Error processing file:</strong> {str(e)}
                 <br><br>
-                <span style="font-size: 0.875rem; color: #5A5A5A;">
+                <span style="font-size: 0.875rem; color: #1565C0;">
                     Please check that your CSV file has the required columns and proper formatting.
                 </span>
             </div>
